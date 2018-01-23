@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
 
 import 'normalize.css';
+import 'simple-line-icons/css/simple-line-icons.css';
 import './assets/coreui/scss/style.scss';
 import './assets/main.css';
 import './assets/fonts/Roboto/stylesheet.css';
