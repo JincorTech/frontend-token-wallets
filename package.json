@@ -35,6 +35,8 @@
     "react-transition-group": "^2.2.1",
     "reactstrap": "5.0.0-alpha.4",
     "redux": "^3.7.2",
+    "redux-form": "^7.2.1",
+    "redux-form-saga": "^0.2.0",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
     "redux-seamless-immutable": "^0.3.2",
