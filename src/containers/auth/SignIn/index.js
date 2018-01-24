@@ -7,7 +7,7 @@ import { namedRoutes } from '../../../routes';
 import { changeStep } from '../../../redux/modules/auth/signIn';
 
 import SignInForm from '../../../components/auth/SignInForm';
-import VerifySignInForm from '../../../components/auth/VerifySignIn';
+import VerifySignInForm from '../../../components/auth/VerifySignInForm';
 
 const SignIn = (props) => {
   const {
@@ -32,7 +32,9 @@ const SignIn = (props) => {
       <button onClick={() => changeStep('signIn')}>signIn</button>
       <CardGroup>
         <Card className="p-4">
-          {renderStep(step)}
+          <CardBody>
+            {renderStep(step)}
+          </CardBody>
         </Card>
         <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
           <CardBody className="text-center">

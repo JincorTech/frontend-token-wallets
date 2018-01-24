@@ -5,6 +5,7 @@ import app from './modules/app/app';
 
 import signInReducer from './modules/auth/signIn';
 import signUpReducer from './modules/auth/signUp';
+import recoveryPasswordReducer from './modules/auth/recoveryPassword';
 
 export default combineReducers({
   routing,
@@ -16,6 +17,7 @@ export default combineReducers({
 
   auth: combineReducers({
     signIn: signInReducer,
-    signUp: signUpReducer
+    signUp: signUpReducer,
+    recoveryPassword: recoveryPasswordReducer
   })
 });
