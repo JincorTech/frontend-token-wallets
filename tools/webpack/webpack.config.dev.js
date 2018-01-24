@@ -49,6 +49,15 @@ const rules = [
     use: ['babel-loader']
   },
   {
+    test: /\.scss?$/,
+    include: /src\/assets\/coreui/,
+    use: [
+      'style-loader',
+      { loader: 'css-loader' },
+      { loader: 'sass-loader' }
+    ]
+  },
+  {
     test: /\.css?$/,
     include: /src/,
     exclude: /src\/assets/,
@@ -72,20 +81,20 @@ const rules = [
     ]
   },
   {
+    test: /\.css$/,
+    include: /(src\/assets|node_modules)/,
+    use: [
+      { loader: 'style-loader' },
+      { loader: 'css-loader' }
+    ]
+  },
+  {
     test: /\.(jpe?g|png|gif|ico)$/i,
     use: [
       {
         loader: 'file-loader',
         options: { name: '[name].[ext]' }
       }
-    ]
-  },
-  {
-    test: /\.css$/,
-    include: /(src\/assets|node_modules)/,
-    use: [
-      { loader: 'style-loader' },
-      { loader: 'css-loader' }
     ]
   },
   {
