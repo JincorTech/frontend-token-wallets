@@ -12,7 +12,7 @@ ADD .env.stage .env
 RUN apk add --no-cache --update nginx && \
   rm -rf /var/cache/apk/*
 
-RUN yarn && yarn build && \
+RUN yarn && npm rebuild node-sass && yarn build && \
   rm -rf ./src ./node_modules /usr/local/lib/node_modules /usr/local/share/.cache/yarn/ && \
   mkdir -p /run/nginx
 
