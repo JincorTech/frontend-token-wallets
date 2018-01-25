@@ -54,7 +54,13 @@ const rules = [
     use: [
       'style-loader',
       { loader: 'css-loader' },
-      { loader: 'sass-loader' }
+      { loader: 'resolve-url-loader' },
+      {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: true
+        }
+      }
     ]
   },
   {
