@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "classnames": "^2.2.5",
     "file-loader": "^1.1.6",
     "node-sass": "^4.7.2",
     "normalize.css": "^7.0.0",

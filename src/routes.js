@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import App from './containers/app/App';
-import AppWrapper from './components/app/AppWrapper';
+import AppWrapper from './containers/app/AppWrapper';
 import Dashboard from './components/app/Dashboard';
 import AuthWrapper from './components/auth/AuthWrapper';
 import SignIn from './containers/auth/SignIn';
@@ -25,7 +25,7 @@ const routes = (
       </AuthWrapper>
 
       <AppWrapper>
-        <Route path="/app/dashboard" component={Dashboard}/>
+        <Route exact path="/app/dashboard" component={Dashboard}/>
       </AppWrapper>
     </App>
   </div>
