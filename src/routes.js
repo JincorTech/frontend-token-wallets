@@ -11,7 +11,10 @@ export const namedRoutes = {
   signUp: '/auth/signup',
   recoveryPassword: '/auth/recovery-password',
   app: '/app',
-  dashboard: '/app/dashboard'
+  dashboard: '/app/dashboard',
+  tokenTransfer: '/app/transfer',
+  transactions: '/app/transactions',
+  settings: '/app/settings'
 };
 
 const routes = (

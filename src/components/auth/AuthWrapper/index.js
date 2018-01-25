@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { Container, Row } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
@@ -16,6 +16,7 @@ const AuthWrapper = () => (
           <Route exact path={namedRoutes.signIn} component={SignIn}/>
           <Route exact path={namedRoutes.signUp} component={SignUp}/>
           <Route exact path={namedRoutes.recoveryPassword} component={RecoveryPassword}/>
+          <Redirect from={namedRoutes.auth} to={namedRoutes.signIn}/>
         </Switch>
       </Row>
     </Container>
