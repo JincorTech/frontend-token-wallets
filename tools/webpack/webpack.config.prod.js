@@ -56,6 +56,29 @@ const rules = [
     use: ['babel-loader']
   },
   {
+    test: /\.scss?$/,
+    include: /src\/assets\/coreui/,
+    use: ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: [
+        {
+          loader: 'css-loader',
+          options: {
+            minimize: true,
+            sourceMap: true
+          }
+        },
+        { loader: 'resolve-url-loader' },
+        {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true
+          }
+        }
+      ]
+    })
+  },
+  {
     test: /\.css?$/,
     include: /src/,
     exclude: /src\/assets/,
