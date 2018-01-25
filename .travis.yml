@@ -1,0 +1,26 @@
+sudo: required
+services:
+- docker
+branches:
+  only:
+  - master
+  - develop
+script:
+- export ENV_FILE=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "prod"; else echo
+  "stage"; fi`
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ];  then echo "production"; elif [
+  "$TRAVIS_BRANCH" == "develop" ]; then echo "stage"; else echo "dev-$(git rev-parse
+  --short HEAD)"; fi`
+- docker build --no-cache -t jincort/frontend-token-wallet-develop:${TAG} .
+- docker run --rm -v $(pwd):/usr/src/app jincort/frontend-token-wallet-develop:${TAG}
+  /bin/sh -c "yarn && cp -r .env.${ENV_FILE} .env && yarn build && yarn run lint:all"
+after_success:
+- export DOCKERFILE=`if [ "$TRAVIS_BRANCH" == "develop" ]; then echo "Dockerfile.stage";
+  else echo "Dockerfile.prod" ; fi`
+- docker build -f $DOCKERFILE --no-cache -t jincort/frontend-token-wallet:${TAG} .
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- docker push jincort/frontend-token-wallet-develop:${TAG}
+- docker push jincort/frontend-token-wallet:${TAG}
+notifications:
+  slack:
+    secure: oGnJkONJm60DnZVulqfKBEexbYuroJ8LToVl1Zdo94OqkH62unDaSk4+996xBElWVXTtR0e90YdI/NX/hjz2NCSJqABb2i/YoErwJXNs7QInsviBcnrtO3DreSZtO5tsbYMZlUnTVq/LDg2R9jcHWqDCdLiP+7WQ1lqpjZLz0k+wLJUeNBnP1CM6zERXwIntZ1hayyyrwoa9hty1+7NThkcoD7mO94nm7K+fEC2YC3MjplpWlFoMXs4YRejHiFw7TtMcyBwYtUjUrqhw2F2BE6PM7oK/oXwiNU9cDr60HomQQbapHyVqnRmMKsLnAXC27QaaqYgNSPNhYKm4vJHAGmv7ZW6NSPWeymRBSc3d+JmBFVQG89xCvRiRaa/NS9YWisQT4l3lVMR7xFXllwkRnyxC/y/f88tFK3Qe1Q0+T2DAoMZgwyUe+hp8yeegjNDUVEEHTaIkB1ys+4ZxHMSYs0uI1XgmsatjVG88Hf39bFVUzj7DvjwHhZ0kBUuTZ79BhXiFkj6OQqx5DLhKhE0YyljIuRYdrZI8r6Q+fP2m2nJdWJ5VO/mjet2VLzB/Sk9eOYe8B7Xct0hMmLWp3xJrrcTT7L7ym1JK2B7ZOdsK27x6wviReY/YMwq9NaT9ac8i4haTcXhtH9qJ2vtn8igSz4y6YYsGuMx+2142zKfncOQ=
