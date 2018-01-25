@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Badge, Nav, NavItem, NavLink as RsNavLink } from 'reactstrap';
 import classNames from 'classnames';
+
 import nav from './_nav';
-import SidebarFooter from './../SidebarFooter';
-import SidebarForm from './../SidebarForm';
-import SidebarHeader from './../SidebarHeader';
 import SidebarMinimizer from './../SidebarMinimizer';
 
 class Sidebar extends Component {
@@ -26,11 +24,7 @@ class Sidebar extends Component {
     e.target.parentElement.classList.toggle('open');
   }
 
-  activeRoute(routeName, props) {
-    // return this.props.location.pathname.indexOf(routeName) > -1
-    // ? 'nav-item nav-dropdown open' : 'nav-item nav-dropdown';
-    // return props.location.pathname.indexOf(routeName) > -1
-    // ? 'nav-item nav-dropdown open' : 'nav-item nav-dropdown';
+  activeRoute(routeName) {
     return this.props.location.pathname.indexOf(routeName) > -1
       ? 'nav-item nav-dropdown open' : 'nav-item nav-dropdown';
   }
@@ -41,15 +35,7 @@ class Sidebar extends Component {
     }
   }
 
-  // todo Sidebar nav secondLevel
-  // secondLevelActive(routeName) {
-  //   return this.props.location.pathname.indexOf(routeName) > -1
-  // ? "nav nav-second-level collapse in" : "nav nav-second-level collapse";
-  // }
-
-
   render() {
-    // badge addon to NavItem
     const badge = (badge) => {
       if (badge) {
         const classes = classNames(badge.class);
@@ -117,12 +103,21 @@ class Sidebar extends Component {
         </ul>
       </li>);
 
-    // nav type
-    const navType = (item, idx) =>
-      (item.title ? title(item, idx) :
-      item.divider ? divider(item, idx) :
-      item.children ? navDropdown(item, idx)
-                    : navItem(item, idx));
+    const navType = (item, idx) => {
+      if (!item.title) {
+        if (!item.divider) {
+          if (!item.children) {
+            return navItem(item, idx);
+          }
+
+          return navDropdown(item, idx);
+        }
+
+        return divider(item, idx);
+      }
+
+      return title(item, idx);
+    };
 
     // nav list
     const navList = (items) => items.map((item, index) => navType(item, index));
@@ -135,14 +130,11 @@ class Sidebar extends Component {
     // sidebar-nav root
     return (
       <div className="sidebar">
-        <SidebarHeader/>
-        <SidebarForm/>
         <nav className="sidebar-nav">
           <Nav>
             {navList(nav.items)}
           </Nav>
         </nav>
-        <SidebarFooter/>
         <SidebarMinimizer/>
       </div>
     );
