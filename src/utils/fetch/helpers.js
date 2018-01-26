@@ -1,3 +1,5 @@
+const { API_HOST } = process.env;
+
 export class RequestError extends Error {
   constructor(error) {
     super(error.message);
@@ -5,6 +7,12 @@ export class RequestError extends Error {
     this.errors = error.errors;
     this.status = error.status_code;
   }
+}
+
+export function pathCreator(path) {
+  const correctPath = path[0] === '/' ? path : `/${path}`;
+
+  return `${API_HOST}${correctPath}`;
 }
 
 /**

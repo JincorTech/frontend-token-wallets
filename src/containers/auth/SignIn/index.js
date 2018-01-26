@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Col, CardGroup, Card, CardBody } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
-import { changeStep } from '../../../redux/modules/auth/signIn';
+import { signIn, verifySignIn } from '../../../redux/modules/auth/signIn';
 
 import SignInForm from '../../../components/auth/SignInForm';
 import VerifySignInForm from '../../../components/auth/VerifySignInForm';
@@ -12,15 +12,36 @@ import VerifySignInForm from '../../../components/auth/VerifySignInForm';
 const SignIn = (props) => {
   const {
     step,
-    changeStep
+    user
   } = props;
+
+  const {
+    accessToken,
+    verification: {
+      verificationId,
+      method
+    }
+  } = user;
 
   const renderStep = (currentStep) => {
     switch (currentStep) {
       case 'signIn':
-        return <SignInForm/>;
+        return (
+          <SignInForm
+            onSubmit={signIn}/>
+        );
       case 'verifySignIn':
-        return <VerifySignInForm/>;
+        return (
+          <VerifySignInForm
+            onSubmit={verifySignIn}
+            initialValues={{
+              accessToken,
+              verification: {
+                id: verificationId,
+                method
+              }
+            }}/>
+        );
       default:
         return 'Something went wrong';
     }
@@ -28,8 +49,6 @@ const SignIn = (props) => {
 
   return (
     <Col md="8">
-      <button onClick={() => changeStep('verifySignIn')}>verifySignIn</button>
-      <button onClick={() => changeStep('signIn')}>signIn</button>
       <CardGroup>
         <Card className="p-4">
           <CardBody>
@@ -53,9 +72,4 @@ const SignIn = (props) => {
   );
 };
 
-export default connect(
-  (state) => ({ ...state.auth.signIn }),
-  {
-    changeStep
-  }
-)(SignIn);
+export default connect((state) => ({ ...state.auth.signIn }))(SignIn);

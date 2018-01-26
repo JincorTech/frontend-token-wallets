@@ -1,33 +1,15 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button, Input, InputGroup } from 'reactstrap';
+import { Button } from 'reactstrap';
+
+import RenderUserField from '../../forms/RenderUserField';
+import RenderEmailInput from '../../forms/RenderEmailInput';
+import RenderPasswordInput from '../../forms/RenderPasswordInput';
 
 const SignUpForm = (props) => {
   const {
     handleSubmit
   } = props;
-
-  const renderEmailInput = () => (
-    <InputGroup className="mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className="icon-user"></i>
-        </span>
-      </div>
-      <Input type="text" placeholder="Username"/>
-    </InputGroup>
-  );
-
-  const renderPasswordInput = () => (
-    <InputGroup className="mb-4">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className="icon-lock"></i>
-        </span>
-      </div>
-      <Input type="password" placeholder="Password"/>
-    </InputGroup>
-  );
 
   return (
     <form onSubmit={handleSubmit}>
@@ -35,13 +17,19 @@ const SignUpForm = (props) => {
       <p className="text-muted">Create your account</p>
 
       <Field
-        component={renderEmailInput}
+        component={RenderUserField}
+        name="name"
+        type="text"
+        placeholder="Your name"/>
+
+      <Field
+        component={RenderEmailInput}
         name="email"
         type="text"
         placeholder="E-mail"/>
 
       <Field
-        component={renderPasswordInput}
+        component={RenderPasswordInput}
         name="password"
         type="password"
         placeholder="Password"/>
@@ -54,6 +42,7 @@ const SignUpForm = (props) => {
 const FormComponent = reduxForm({
   form: 'signUp',
   initialValues: {
+    name: '',
     email: '',
     password: ''
   }
