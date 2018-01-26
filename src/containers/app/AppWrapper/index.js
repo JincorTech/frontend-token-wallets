@@ -4,7 +4,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
-import { logout } from '../../../redux/modules/app/app';
+import { logout, fetchUser } from '../../../redux/modules/app/app';
 
 import Header from '../../../components/app/Header';
 import Sidebar from '../../../components/app/Sidebar';
@@ -15,6 +15,12 @@ import Transactions from '../../../components/app/Transactions';
 import Settings from '../../../components/app/Settings';
 
 class AppWrapper extends Component {
+  componentDidMount() {
+    const { fetchUser } = this.props;
+
+    fetchUser();
+  }
+
   render() {
     const {
       logout
@@ -45,7 +51,8 @@ class AppWrapper extends Component {
 const ConnectedComponent = connect(
   null,
   {
-    logout
+    logout,
+    fetchUser
   },
   null,
   { pure: false }
