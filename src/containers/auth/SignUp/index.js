@@ -25,7 +25,10 @@ const SignUp = (props) => {
   const renderStep = (currentStep) => {
     switch (currentStep) {
       case 'signUp':
-        return <SignUpForm onSubmit={signUp}/>;
+        return (
+          <SignUpForm
+            onSubmit={signUp}/>
+        );
       case 'verifySignUp':
         return (
           <VerifySignUpForm

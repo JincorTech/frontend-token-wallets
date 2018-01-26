@@ -1,36 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
-import { Row, Col, Button, Input, InputGroup } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
+
+import RenderEmailInput from '../../forms/RenderEmailInput';
+import RenderPasswordInput from '../../forms/RenderPasswordInput';
 
 const SignInForm = (props) => {
   const {
     handleSubmit
   } = props;
-
-  const renderEmailInput = () => (
-    <InputGroup className="mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className="icon-user"></i>
-        </span>
-      </div>
-      <Input type="text" placeholder="Username"/>
-    </InputGroup>
-  );
-
-  const renderPasswordInput = () => (
-    <InputGroup className="mb-4">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className="icon-lock"></i>
-        </span>
-      </div>
-      <Input type="password" placeholder="Password"/>
-    </InputGroup>
-  );
 
   return (
     <form onSubmit={handleSubmit}>
@@ -38,13 +19,13 @@ const SignInForm = (props) => {
       <p className="text-muted">Sign In to your account</p>
 
       <Field
-        component={renderEmailInput}
+        component={RenderEmailInput}
         name="email"
-        type="text"
+        type="email"
         placeholder="E-mail"/>
 
       <Field
-        component={renderPasswordInput}
+        component={RenderPasswordInput}
         name="password"
         type="password"
         placeholder="Password"/>

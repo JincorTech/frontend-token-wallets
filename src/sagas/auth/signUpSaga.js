@@ -1,9 +1,11 @@
 import { all, takeLatest, call, put, fork } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { post } from '../../utils/fetch';
+import { namedRoutes } from '../../routes';
 
 import { signUp, verifySignUp, changeStep, resetStore } from '../../redux/modules/auth/signUp';
 import { login } from '../../redux/modules/app/app';
+
 
 function* signUpIterator({ payload }) {
   try {
@@ -23,6 +25,7 @@ function* signUpSaga() {
   );
 }
 
+
 function* verifySignUpIterator({ payload }) {
   try {
     const data = yield call(post, '/user/activate', payload);
@@ -30,7 +33,7 @@ function* verifySignUpIterator({ payload }) {
     yield put(verifySignUp.success(data));
     yield put(login(data.accessToken));
     yield put(resetStore());
-    yield put(push('/app/dashboard'));
+    yield put(push(namedRoutes.dashboard));
   } catch (e) {
     yield call(console.error, e);
   }
@@ -42,6 +45,7 @@ function* verifySignUpSaga() {
     verifySignUpIterator
   );
 }
+
 
 export default function* () {
   yield all([
