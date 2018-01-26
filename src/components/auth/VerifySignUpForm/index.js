@@ -1,22 +1,14 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button, Input, InputGroup } from 'reactstrap';
+import { Button } from 'reactstrap';
+
+import RenderPinInput from '../../forms/RenderPinInput';
+import RenderHiddenInput from '../../forms/RenderHiddenInput';
 
 const VerifySignUpForm = (props) => {
   const {
     handleSubmit
   } = props;
-
-  const renderPinInput = () => (
-    <InputGroup className="mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className="icon-lock"></i>
-        </span>
-      </div>
-      <Input type="text" placeholder="PIN"/>
-    </InputGroup>
-  );
 
   return (
     <form onSubmit={handleSubmit}>
@@ -24,10 +16,22 @@ const VerifySignUpForm = (props) => {
       <p className="text-muted">Verify your email</p>
 
       <Field
-        component={renderPinInput}
-        name="email"
+        component={RenderPinInput}
+        name="code"
         type="text"
         placeholder="PIN"/>
+
+      <Field
+        component={RenderHiddenInput}
+        name="email"
+        type="hidden"
+        disabled/>
+
+        <Field
+        component={RenderHiddenInput}
+        name="verificationId"
+        type="hidden"
+        disabled/>
 
       <Button color="success" block>Submit</Button>
     </form>
@@ -37,7 +41,9 @@ const VerifySignUpForm = (props) => {
 const FormComponent = reduxForm({
   form: 'verifySignUp',
   initialValues: {
-    pin: ''
+    email: '',
+    verificationId: '',
+    code: ''
   }
 })(VerifySignUpForm);
 

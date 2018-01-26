@@ -13,7 +13,19 @@ export const resetStore = createAction(RESET_STORE);
 
 const initialState = from({
   spinner: false,
-  step: 'signUp'
+  step: 'signUp',
+  user: {
+    agreeTos: true,
+    defaultVerificationMethod: 'email',
+    email: '',
+    id: '',
+    isVerified: false,
+    name: '',
+    verification: {
+      id: '',
+      method: 'email'
+    }
+  }
 });
 
 export default createReducer({
@@ -23,9 +35,10 @@ export default createReducer({
     })
   ),
 
-  [signUp.SUCCESS]: (state) => (
+  [signUp.SUCCESS]: (state, { payload }) => (
     state.merge({
-      spinner: false
+      spinner: false,
+      user: payload
     })
   ),
 

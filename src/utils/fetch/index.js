@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import { checkHttpStatus, parseJSON } from './helpers';
+import { pathCreator, checkHttpStatus, parseJSON } from './helpers';
 
 /**
  * Fetch wrapper function
@@ -9,7 +9,7 @@ import { checkHttpStatus, parseJSON } from './helpers';
  * @returns       - promise
  */
 
-const apiFetch = (path, options = {}) => fetch(path, {
+const apiFetch = (path, options = {}) => fetch(pathCreator(path), {
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json'

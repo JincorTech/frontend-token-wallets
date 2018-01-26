@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card, CardBody, CardFooter } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
-import { changeStep } from '../../../redux/modules/auth/signUp';
+import { signUp, verifySignUp } from '../../../redux/modules/auth/signUp';
 
 import SignUpForm from '../../../components/auth/SignUpForm';
 import VerifySignUpForm from '../../../components/auth/VerifySignUpForm';
@@ -12,15 +12,29 @@ import VerifySignUpForm from '../../../components/auth/VerifySignUpForm';
 const SignUp = (props) => {
   const {
     step,
-    changeStep
+    user
   } = props;
+
+  const {
+    email,
+    verification: {
+      id
+    }
+  } = user;
 
   const renderStep = (currentStep) => {
     switch (currentStep) {
       case 'signUp':
-        return <SignUpForm/>;
+        return <SignUpForm onSubmit={signUp}/>;
       case 'verifySignUp':
-        return <VerifySignUpForm/>;
+        return (
+          <VerifySignUpForm
+            onSubmit={verifySignUp}
+            initialValues={{
+              email,
+              verificationId: id
+            }}/>
+        );
       default:
         return 'Something went wrong';
     }
@@ -28,8 +42,6 @@ const SignUp = (props) => {
 
   return (
     <Col md="6">
-      <button onClick={() => changeStep('verifySignUp')}>verifySignUp</button>
-      <button onClick={() => changeStep('signUp')}>signUp</button>
       <Card className="mx-4">
         <CardBody className="p-4">
           {renderStep(step)}
@@ -47,9 +59,4 @@ const SignUp = (props) => {
   );
 };
 
-export default connect(
-  (state) => ({ ...state.auth.signUp }),
-  {
-    changeStep
-  }
-)(SignUp);
+export default connect((state) => ({ ...state.auth.signUp }))(SignUp);
