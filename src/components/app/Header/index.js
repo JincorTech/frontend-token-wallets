@@ -23,6 +23,10 @@ class Header extends Component {
   }
 
   render() {
+    const {
+      logout
+    } = this.props;
+
     return (
       <header className="app-header navbar">
         <NavbarToggler className="d-lg-none" onClick={this.mobileSidebarToggle}>
@@ -33,7 +37,7 @@ class Header extends Component {
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
         <Nav className="ml-auto pr-4" navbar>
-          <NavLink href="#"><i className="icon-lock"></i> Logout</NavLink>
+          <NavLink href="#" onClick={() => logout()}><i className="icon-lock"></i> Logout</NavLink>
         </Nav>
       </header>
     );

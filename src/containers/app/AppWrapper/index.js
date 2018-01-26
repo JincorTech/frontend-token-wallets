@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
+import { logout } from '../../../redux/modules/app/app';
 
 import Header from '../../../components/app/Header';
 import Sidebar from '../../../components/app/Sidebar';
@@ -13,11 +15,13 @@ import Transactions from '../../../components/app/Transactions';
 import Settings from '../../../components/app/Settings';
 
 const AppWrapper = (props) => {
-  console.log(props);
+  const {
+    logout
+  } = props;
 
   return (
     <div className="app">
-      <Header />
+      <Header logout={logout}/>
       <div className="app-body">
         <Sidebar {...props}/>
         <main className="main">
@@ -36,4 +40,9 @@ const AppWrapper = (props) => {
   );
 };
 
-export default AppWrapper;
+export default connect(
+  null,
+  {
+    logout
+  }
+)(AppWrapper);
