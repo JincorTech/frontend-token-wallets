@@ -9,7 +9,7 @@ import { logout } from '../../../redux/modules/app/app';
 import Header from '../../../components/app/Header';
 import Sidebar from '../../../components/app/Sidebar';
 
-import Dashboard from '../../../components/app/Dashboard';
+import Dashboard from '../../../containers/app/Dashboard';
 import TransferTokens from '../../../components/app/TokenTransfer';
 import Transactions from '../../../components/app/Transactions';
 import Settings from '../../../components/app/Settings';

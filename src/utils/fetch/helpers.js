@@ -1,3 +1,5 @@
+import { isAuth, getToken } from '../auth';
+
 const { API_HOST } = process.env;
 
 export class RequestError extends Error {
@@ -40,3 +42,9 @@ export const parseJSON = (res) => {
 
   throw new RequestError(res);
 };
+
+export function authHeader() {
+  return isAuth()
+    ? { Authorization: `Bearer ${getToken()}` }
+    : {};
+}

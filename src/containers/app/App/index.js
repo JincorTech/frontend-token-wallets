@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { fetchUser } from '../../../redux/modules/app/app';
 
 class App extends Component {
+  componentDidMount() {
+    const { fetchUser } = this.props;
+
+    fetchUser();
+  }
+
   render() {
     const { children } = this.props;
 
@@ -12,4 +21,9 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  {
+    fetchUser
+  }
+)(App);
