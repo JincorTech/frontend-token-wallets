@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Col, CardGroup, Card, CardBody } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
@@ -72,4 +72,6 @@ const SignIn = (props) => {
   );
 };
 
-export default connect((state) => ({ ...state.auth.signIn }))(SignIn);
+const ConnectedComponent = connect((state) => ({ ...state.auth.signIn }), null, { pure: false })(SignIn);
+const ComponentWithRouter = withRouter(ConnectedComponent);
+export default ComponentWithRouter;

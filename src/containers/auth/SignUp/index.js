@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Row, Col, Card, CardBody, CardFooter } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
@@ -62,4 +62,6 @@ const SignUp = (props) => {
   );
 };
 
-export default connect((state) => ({ ...state.auth.signUp }))(SignUp);
+const ConnectedComponent = connect((state) => ({ ...state.auth.signUp }), null, { pure: false })(SignUp);
+const ComponentWithRouter = withRouter(ConnectedComponent);
+export default ComponentWithRouter;

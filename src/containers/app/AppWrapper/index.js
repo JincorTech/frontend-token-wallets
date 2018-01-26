@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
@@ -14,35 +14,41 @@ import TransferTokens from '../../../components/app/TokenTransfer';
 import Transactions from '../../../components/app/Transactions';
 import Settings from '../../../components/app/Settings';
 
-const AppWrapper = (props) => {
-  const {
-    logout
-  } = props;
+class AppWrapper extends Component {
+  render() {
+    const {
+      logout
+    } = this.props;
 
-  return (
-    <div className="app">
-      <Header logout={logout}/>
-      <div className="app-body">
-        <Sidebar {...props}/>
-        <main className="main">
-          <Container fluid>
-            <Switch>
-              <Route exact path={namedRoutes.dashboard} component={Dashboard}/>
-              <Route exact path={namedRoutes.tokenTransfer} component={TransferTokens}/>
-              <Route exact path={namedRoutes.transactions} component={Transactions}/>
-              <Route exact path={namedRoutes.settings} component={Settings}/>
-              <Redirect from={namedRoutes.app} to={namedRoutes.dashboard}/>
-            </Switch>
-          </Container>
-        </main>
+    return (
+      <div className="app">
+        <Header logout={logout}/>
+        <div className="app-body">
+          <Sidebar {...this.props}/>
+          <main className="main">
+            <Container fluid>
+              <Switch>
+                <Route exact path={namedRoutes.dashboard} component={Dashboard}/>
+                <Route exact path={namedRoutes.tokenTransfer} component={TransferTokens}/>
+                <Route exact path={namedRoutes.transactions} component={Transactions}/>
+                <Route exact path={namedRoutes.settings} component={Settings}/>
+                <Redirect from={namedRoutes.app} to={namedRoutes.dashboard}/>
+              </Switch>
+            </Container>
+          </main>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default connect(
+const ConnectedComponent = connect(
   null,
   {
     logout
-  }
+  },
+  null,
+  { pure: false }
 )(AppWrapper);
+const ComponentWithRouter = withRouter(ConnectedComponent);
+export default ComponentWithRouter;
