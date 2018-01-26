@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Col, Card, CardBody } from 'reactstrap';
 
 import { changeStep } from '../../../redux/modules/auth/recoveryPassword';
@@ -41,9 +42,13 @@ const RecoveryPassword = (props) => {
   );
 };
 
-export default connect(
+const ConnectedComponent = connect(
   (state) => ({ ...state.auth.recoveryPassword }),
   {
     changeStep
-  }
+  },
+  null,
+  { pure: false }
 )(RecoveryPassword);
+const ComponentWithRouter = withRouter(ConnectedComponent);
+export default ComponentWithRouter;

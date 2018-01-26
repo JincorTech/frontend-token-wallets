@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Row, Col, Card, CardHeader, CardBody, Table } from 'reactstrap';
 
 import { fetchBalances } from '../../../redux/modules/app/dashboard';
@@ -19,14 +20,6 @@ class Dashboard extends Component {
       email,
       name
     } = this.props;
-
-    console.log(
-      ethBalance,
-      erc20TokenBalance,
-      ethAddress,
-      email,
-      name
-    );
 
     return (
       <div className="animated fadeIn mt-4">
@@ -99,12 +92,16 @@ class Dashboard extends Component {
   }
 }
 
-export default connect(
+const ConnectedComponent = connect(
   (state) => ({
     ...state.app.dashboard,
     ...state.app.app.user
   }),
   {
     fetchBalances
-  }
+  },
+  null,
+  { pure: false }
 )(Dashboard);
+const ComponentWithRouter = withRouter(ConnectedComponent);
+export default ComponentWithRouter;
