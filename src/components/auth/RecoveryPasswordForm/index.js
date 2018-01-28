@@ -10,8 +10,14 @@ const RecoveryPasswordForm = (props) => {
   const {
     handleSubmit,
     invalid,
-    error
+    error,
+    fetching
   } = props;
+
+  const renderButton = () =>
+    (fetching
+      ? (<Button color="success" disabled={true} block><i className="fa fa-cog fa-spin fa-fw"/> Loading</Button>)
+      : (<Button color="success" disabled={invalid} block>Submit</Button>));
 
   return (
     <form onSubmit={handleSubmit}>
@@ -28,7 +34,7 @@ const RecoveryPasswordForm = (props) => {
 
       {error ? <Alert color="danger">{error}</Alert> : null}
 
-      <Button color="success" disabled={invalid} block>Submit</Button>
+      {renderButton()}
     </form>
   );
 };

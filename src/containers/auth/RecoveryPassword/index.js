@@ -14,6 +14,7 @@ const RecoveryPassword = (props) => {
     step,
     code,
     email,
+    fetching,
     verification: {
       verificationId,
       method
@@ -25,17 +26,20 @@ const RecoveryPassword = (props) => {
       case 'recoveryPassword':
         return (
           <RecoveryPasswordForm
-            onSubmit={recoveryPassword}/>
+            onSubmit={recoveryPassword}
+            fetching={fetching}/>
         );
       case 'verifyRecoveryPassword':
         return (
           <VerifyRecoveryPasswordForm
-            onSubmit={verifyRecoveryPassword}/>
+            onSubmit={verifyRecoveryPassword}
+            fetching={fetching}/>
         );
       case 'setNewPassword':
         return (
           <SetNewPasswordForm
             onSubmit={setNewPassword}
+            fetching={fetching}
             initialValues={{
               email,
               verification: {

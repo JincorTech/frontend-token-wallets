@@ -11,8 +11,14 @@ const SignUpForm = (props) => {
   const {
     handleSubmit,
     invalid,
-    error
+    error,
+    fetching
   } = props;
+
+  const renderButton = () =>
+    (fetching
+      ? (<Button color="success" disabled={true} block><i className="fa fa-cog fa-spin fa-fw"/> Loading</Button>)
+      : (<Button color="success" disabled={invalid} block>Create Account</Button>));
 
   return (
     <form onSubmit={handleSubmit}>
@@ -44,7 +50,7 @@ const SignUpForm = (props) => {
 
       {error ? <Alert color="danger">{error}</Alert> : null}
 
-      <Button color="success" disabled={invalid} block>Create Account</Button>
+      {renderButton()}
     </form>
   );
 };
