@@ -99,9 +99,7 @@ const ConnectedComponent = connect(
   }),
   {
     fetchBalances
-  },
-  null,
-  { pure: false }
+  }
 )(Dashboard);
 const ComponentWithRouter = withRouter(ConnectedComponent);
 export default ComponentWithRouter;

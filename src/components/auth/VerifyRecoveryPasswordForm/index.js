@@ -1,35 +1,26 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button, Input, InputGroup } from 'reactstrap';
+import { Button } from 'reactstrap';
+
+import RenderPinInput from '../../forms/RenderPinInput';
 
 const VerifyRecoveryPasswordForm = (props) => {
   const {
     handleSubmit
   } = props;
 
-  const renderPinInput = () => (
-    <InputGroup className="mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className="icon-lock"></i>
-        </span>
-      </div>
-      <Input type="email" placeholder="PIN"/>
-    </InputGroup>
-  );
-
   return (
     <form onSubmit={handleSubmit}>
       <h1>Recovery password</h1>
-      <p className="text-muted">Verify that</p>
+      <p className="text-muted">Enter pin code from email</p>
 
       <Field
-        component={renderPinInput}
-        name="pin"
+        component={RenderPinInput}
+        name="code"
         type="text"
         placeholder="PIN"/>
 
-      <Button color="success" block>Catch this</Button>
+      <Button color="success" block>Submit</Button>
     </form>
   );
 };
@@ -37,7 +28,7 @@ const VerifyRecoveryPasswordForm = (props) => {
 const FormComponent = reduxForm({
   form: 'verifyRecoveryPassword',
   initialValues: {
-    pin: ''
+    code: ''
   }
 })(VerifyRecoveryPasswordForm);
 

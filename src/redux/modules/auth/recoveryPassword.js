@@ -15,7 +15,16 @@ export const resetStore = createAction(RESET_STORE);
 
 const initialState = from({
   spinner: false,
-  step: 'recoveryPassword'
+  step: 'recoveryPassword',
+  email: '',
+  code: '',
+  verification: {
+    verificationId: '',
+    consumer: '',
+    expiredOn: 0,
+    status: 0,
+    method: ''
+  }
 });
 
 export default createReducer({
@@ -25,9 +34,11 @@ export default createReducer({
     })
   ),
 
-  [recoveryPassword.SUCCESS]: (state) => (
+  [recoveryPassword.SUCCESS]: (state, { payload }) => (
     state.merge({
-      spinner: false
+      spinner: false,
+      email: payload.email,
+      verification: payload.verification
     })
   ),
 
@@ -37,9 +48,10 @@ export default createReducer({
     })
   ),
 
-  [verifyRecoveryPassword.REQUEST]: (state) => (
+  [verifyRecoveryPassword.REQUEST]: (state, { payload }) => (
     state.merge({
-      spinner: true
+      spinner: true,
+      code: payload.code
     })
   ),
 

@@ -5,6 +5,7 @@ import appSaga from './app/appSaga';
 import dashboardSaga from './app/dashboardSaga';
 import signUpSaga from './auth/signUpSaga';
 import signInSaga from './auth/signInSaga';
+import recoveryPasswordSaga from './auth/recoveryPasswordSaga';
 
 export default function* () {
   yield all([
@@ -12,6 +13,7 @@ export default function* () {
     fork(appSaga),
     fork(dashboardSaga),
     fork(signUpSaga),
-    fork(signInSaga)
+    fork(signInSaga),
+    fork(recoveryPasswordSaga)
   ]);
 }

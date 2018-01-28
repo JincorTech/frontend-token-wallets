@@ -73,6 +73,6 @@ const SignIn = (props) => {
 };
 
 const ConnectedComponent = connect((state) =>
-  ({ ...state.auth.signIn }), null, null, { pure: false })(SignIn);
+  ({ ...state.auth.signIn }))(SignIn);
 const ComponentWithRouter = withRouter(ConnectedComponent);
 export default ComponentWithRouter;

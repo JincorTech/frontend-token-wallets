@@ -1,30 +1,21 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button, Input, InputGroup } from 'reactstrap';
+import { Button } from 'reactstrap';
+
+import RenderPasswordInput from '../../forms/RenderPasswordInput';
 
 const SetNewPasswordForm = (props) => {
   const {
     handleSubmit
   } = props;
 
-  const renderPasswordInput = () => (
-    <InputGroup className="mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className="icon-user"></i>
-        </span>
-      </div>
-      <Input type="password" placeholder="New password"/>
-    </InputGroup>
-  );
-
   return (
     <form onSubmit={handleSubmit}>
       <h1>Recovery password</h1>
-      <p className="text-muted">ello my queen</p>
+      <p className="text-muted">Enter new password</p>
 
       <Field
-        component={renderPasswordInput}
+        component={RenderPasswordInput}
         name="password"
         type="password"
         placeholder="New password"/>
@@ -37,7 +28,13 @@ const SetNewPasswordForm = (props) => {
 const FormComponent = reduxForm({
   form: 'setNewPassword',
   initialValues: {
-    password: ''
+    email: '',
+    password: '',
+    verification: {
+      method: '',
+      verificationId: '',
+      code: ''
+    }
   }
 })(SetNewPasswordForm);
 
