@@ -12,7 +12,7 @@ export const changeStep = createAction(CHANGE_STEP);
 export const resetStore = createAction(RESET_STORE);
 
 const initialState = from({
-  spinner: false,
+  fetching: false,
   step: 'signIn',
   user: {
     accessToken: '',
@@ -30,38 +30,38 @@ const initialState = from({
 export default createReducer({
   [signIn.REQUEST]: (state) => (
     state.merge({
-      spinner: true
+      fetching: true
     })
   ),
 
   [signIn.SUCCESS]: (state, { payload }) => (
     state.merge({
-      spinner: false,
+      fetching: false,
       user: payload
     })
   ),
 
   [signIn.FAILURE]: (state) => (
     state.merge({
-      spinner: false
+      fetching: false
     })
   ),
 
   [verifySignIn.REQUEST]: (state) => (
     state.merge({
-      spinner: true
+      fetching: true
     })
   ),
 
   [verifySignIn.SUCCESS]: (state) => (
     state.merge({
-      spinner: false
+      fetching: false
     })
   ),
 
   [verifySignIn.FAILURE]: (state) => (
     state.merge({
-      spinner: false
+      fetching: false
     })
   ),
 

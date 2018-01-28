@@ -5,22 +5,22 @@ export default {
     {
       name: 'Dashboard',
       url: '/app/dashboard',
-      icon: 'icon-speedometer'
+      icon: 'fa fa-tachometer fa-fw'
     },
     {
       name: 'Transfer tokens',
       url: '/app/transfer',
-      icon: 'icon-refresh'
+      icon: 'fa fa-exchange fa-fw'
     },
     {
       name: 'Transactions',
       url: '/app/transactions',
-      icon: 'icon-list'
+      icon: 'fa fa-list fa-fw'
     },
     {
       name: 'Settings',
       url: '/app/settings',
-      icon: 'icon-settings'
+      icon: 'fa fa-cogs fa-fw'
     }
   ]
 };

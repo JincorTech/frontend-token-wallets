@@ -1,35 +1,39 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button, Input, InputGroup } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
+
+import { passwordValidate } from '../../../utils/validators';
+
+import RenderPasswordInput from '../../forms/RenderPasswordInput';
 
 const SetNewPasswordForm = (props) => {
   const {
-    handleSubmit
+    handleSubmit,
+    invalid,
+    error,
+    fetching
   } = props;
 
-  const renderPasswordInput = () => (
-    <InputGroup className="mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className="icon-user"></i>
-        </span>
-      </div>
-      <Input type="password" placeholder="New password"/>
-    </InputGroup>
-  );
+  const renderButton = () =>
+    (fetching
+      ? (<Button color="success" disabled={true} block><i className="fa fa-cog fa-spin fa-fw"/> Loading</Button>)
+      : (<Button color="success" disabled={invalid} block>Change password</Button>));
 
   return (
     <form onSubmit={handleSubmit}>
       <h1>Recovery password</h1>
-      <p className="text-muted">ello my queen</p>
+      <p className="text-muted">Enter new password</p>
 
       <Field
-        component={renderPasswordInput}
+        component={RenderPasswordInput}
         name="password"
         type="password"
-        placeholder="New password"/>
+        placeholder="New password"
+        validate={passwordValidate}/>
 
-      <Button color="success" block>Change password</Button>
+      {error ? <Alert color="danger">{error}</Alert> : null}
+
+      {renderButton()}
     </form>
   );
 };
@@ -37,7 +41,13 @@ const SetNewPasswordForm = (props) => {
 const FormComponent = reduxForm({
   form: 'setNewPassword',
   initialValues: {
-    password: ''
+    email: '',
+    password: '',
+    verification: {
+      method: '',
+      verificationId: '',
+      code: ''
+    }
   }
 })(SetNewPasswordForm);
 

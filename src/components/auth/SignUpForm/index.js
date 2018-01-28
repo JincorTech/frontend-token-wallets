@@ -1,15 +1,24 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
 
-import RenderUserField from '../../forms/RenderUserField';
-import RenderEmailInput from '../../forms/RenderEmailInput';
+import { fullNameValidate, emailValidate, passwordValidate } from '../../../utils/validators';
+
+import RenderInput from '../../forms/RenderInput';
 import RenderPasswordInput from '../../forms/RenderPasswordInput';
 
 const SignUpForm = (props) => {
   const {
-    handleSubmit
+    handleSubmit,
+    invalid,
+    error,
+    fetching
   } = props;
+
+  const renderButton = () =>
+    (fetching
+      ? (<Button color="success" disabled={true} block><i className="fa fa-cog fa-spin fa-fw"/> Loading</Button>)
+      : (<Button color="success" disabled={invalid} block>Create Account</Button>));
 
   return (
     <form onSubmit={handleSubmit}>
@@ -17,24 +26,31 @@ const SignUpForm = (props) => {
       <p className="text-muted">Create your account</p>
 
       <Field
-        component={RenderUserField}
+        component={RenderInput}
+        icon={<i className="fa fa-user fa-fw"/>}
         name="name"
         type="text"
-        placeholder="Your name"/>
+        placeholder="Your name"
+        validate={fullNameValidate}/>
 
       <Field
-        component={RenderEmailInput}
+        component={RenderInput}
+        icon={<i className="fa fa-envelope fa-fw"/>}
         name="email"
-        type="text"
-        placeholder="E-mail"/>
+        type="email"
+        placeholder="E-mail"
+        validate={emailValidate}/>
 
       <Field
         component={RenderPasswordInput}
         name="password"
         type="password"
-        placeholder="Password"/>
+        placeholder="Password"
+        validate={passwordValidate}/>
 
-      <Button color="success" block>Create Account</Button>
+      {error ? <Alert color="danger">{error}</Alert> : null}
+
+      {renderButton()}
     </form>
   );
 };

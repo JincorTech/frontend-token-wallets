@@ -12,7 +12,8 @@ import VerifySignUpForm from '../../../components/auth/VerifySignUpForm';
 const SignUp = (props) => {
   const {
     step,
-    user
+    user,
+    fetching
   } = props;
 
   const {
@@ -27,12 +28,14 @@ const SignUp = (props) => {
       case 'signUp':
         return (
           <SignUpForm
-            onSubmit={signUp}/>
+            onSubmit={signUp}
+            fetching={fetching}/>
         );
       case 'verifySignUp':
         return (
           <VerifySignUpForm
             onSubmit={verifySignUp}
+            fetching={fetching}
             initialValues={{
               email,
               verificationId: id
@@ -63,6 +66,6 @@ const SignUp = (props) => {
 };
 
 const ConnectedComponent = connect((state) =>
-  ({ ...state.auth.signUp }), null, null, { pure: false })(SignUp);
+  ({ ...state.auth.signUp }))(SignUp);
 const ComponentWithRouter = withRouter(ConnectedComponent);
 export default ComponentWithRouter;

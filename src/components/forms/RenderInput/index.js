@@ -1,8 +1,13 @@
 import React from 'react';
 import { Input, InputGroup, FormFeedback } from 'reactstrap';
 
-const RenderPasswordInput = (props) => {
-  const { input, meta, ...restProps } = props;
+const RenderInput = (props) => {
+  const {
+    input,
+    meta,
+    icon,
+    ...restProps
+  } = props;
 
   const {
     error,
@@ -22,13 +27,13 @@ const RenderPasswordInput = (props) => {
     <InputGroup className="mb-3">
       <div className="input-group-prepend">
         <span className="input-group-text">
-          <i className="fa fa-lock fa-fw"></i>
+          {icon}
         </span>
       </div>
-      <Input valid={isValid()} type="password" meta={meta} {...input} {...restProps}/>
+      <Input valid={isValid()} meta={meta} {...input} {...restProps}/>
       <FormFeedback>{error}</FormFeedback>
     </InputGroup>
   );
 };
 
-export default RenderPasswordInput;
+export default RenderInput;

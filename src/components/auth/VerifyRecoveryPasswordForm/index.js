@@ -1,35 +1,40 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button, Input, InputGroup } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
+
+import { twoFactorCode } from '../../../utils/validators';
+
+import RenderInput from '../../forms/RenderInput';
 
 const VerifyRecoveryPasswordForm = (props) => {
   const {
-    handleSubmit
+    handleSubmit,
+    invalid,
+    error,
+    fetching
   } = props;
 
-  const renderPinInput = () => (
-    <InputGroup className="mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className="icon-lock"></i>
-        </span>
-      </div>
-      <Input type="email" placeholder="PIN"/>
-    </InputGroup>
-  );
+  const renderButton = () =>
+    (fetching
+      ? (<Button color="success" disabled={true} block><i className="fa fa-cog fa-spin fa-fw"/> Loading</Button>)
+      : (<Button color="success" disabled={invalid} block>Submit</Button>));
 
   return (
     <form onSubmit={handleSubmit}>
       <h1>Recovery password</h1>
-      <p className="text-muted">Verify that</p>
+      <p className="text-muted">Enter pin code from email</p>
 
       <Field
-        component={renderPinInput}
-        name="pin"
+        component={RenderInput}
+        icon={<i className="fa fa-key fa-fw"/>}
+        name="code"
         type="text"
-        placeholder="PIN"/>
+        placeholder="PIN"
+        validate={twoFactorCode}/>
 
-      <Button color="success" block>Catch this</Button>
+      {error ? <Alert color="danger">{error}</Alert> : null}
+
+      {renderButton()}
     </form>
   );
 };
@@ -37,7 +42,7 @@ const VerifyRecoveryPasswordForm = (props) => {
 const FormComponent = reduxForm({
   form: 'verifyRecoveryPassword',
   initialValues: {
-    pin: ''
+    code: ''
   }
 })(VerifyRecoveryPasswordForm);
 

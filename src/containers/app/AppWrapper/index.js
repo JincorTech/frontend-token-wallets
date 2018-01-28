@@ -53,9 +53,7 @@ const ConnectedComponent = connect(
   {
     logout,
     fetchUser
-  },
-  null,
-  { pure: false }
+  }
 )(AppWrapper);
 const ComponentWithRouter = withRouter(ConnectedComponent);
 export default ComponentWithRouter;

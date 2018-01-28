@@ -1,14 +1,24 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
 
-import RenderPinInput from '../../forms/RenderPinInput';
+import { twoFactorCode } from '../../../utils/validators';
+
+import RenderInput from '../../forms/RenderInput';
 import RenderHiddenInput from '../../forms/RenderHiddenInput';
 
 const VerifySignUpForm = (props) => {
   const {
-    handleSubmit
+    handleSubmit,
+    invalid,
+    error,
+    fetching
   } = props;
+
+  const renderButton = () =>
+    (fetching
+      ? (<Button color="success" disabled={true} block><i className="fa fa-cog fa-spin fa-fw"/> Loading</Button>)
+      : (<Button color="success" disabled={invalid} block>Submit</Button>));
 
   return (
     <form onSubmit={handleSubmit}>
@@ -16,10 +26,12 @@ const VerifySignUpForm = (props) => {
       <p className="text-muted">Verify your email</p>
 
       <Field
-        component={RenderPinInput}
+        component={RenderInput}
+        icon={<i className="fa fa-key fa-fw"/>}
         name="code"
         type="text"
-        placeholder="PIN"/>
+        placeholder="PIN"
+        validate={twoFactorCode}/>
 
       <Field
         component={RenderHiddenInput}
@@ -33,7 +45,9 @@ const VerifySignUpForm = (props) => {
         type="hidden"
         disabled/>
 
-      <Button color="success" block>Submit</Button>
+      {error ? <Alert color="danger">{error}</Alert> : null}
+
+      {renderButton()}
     </form>
   );
 };

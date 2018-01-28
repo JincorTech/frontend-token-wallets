@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Col, Card, CardBody } from 'reactstrap';
 
-import { changeStep } from '../../../redux/modules/auth/recoveryPassword';
+import { recoveryPassword, verifyRecoveryPassword, setNewPassword } from '../../../redux/modules/auth/recoveryPassword';
 
 import RecoveryPasswordForm from '../../../components/auth/RecoveryPasswordForm';
 import VerifyRecoveryPasswordForm from '../../../components/auth/VerifyRecoveryPasswordForm';
@@ -12,17 +12,43 @@ import SetNewPasswordForm from '../../../components/auth/SetNewPasswordForm';
 const RecoveryPassword = (props) => {
   const {
     step,
-    changeStep
+    code,
+    email,
+    fetching,
+    verification: {
+      verificationId,
+      method
+    }
   } = props;
 
   const renderStep = (currentStep) => {
     switch (currentStep) {
       case 'recoveryPassword':
-        return <RecoveryPasswordForm/>;
+        return (
+          <RecoveryPasswordForm
+            onSubmit={recoveryPassword}
+            fetching={fetching}/>
+        );
       case 'verifyRecoveryPassword':
-        return <VerifyRecoveryPasswordForm/>;
+        return (
+          <VerifyRecoveryPasswordForm
+            onSubmit={verifyRecoveryPassword}
+            fetching={fetching}/>
+        );
       case 'setNewPassword':
-        return <SetNewPasswordForm/>;
+        return (
+          <SetNewPasswordForm
+            onSubmit={setNewPassword}
+            fetching={fetching}
+            initialValues={{
+              email,
+              verification: {
+                verificationId,
+                method,
+                code
+              }
+            }}/>
+        );
       default:
         return 'Something went wrong';
     }
@@ -30,9 +56,6 @@ const RecoveryPassword = (props) => {
 
   return (
     <Col md="6">
-      <button onClick={() => changeStep('recoveryPassword')}>recoveryPassword</button>
-      <button onClick={() => changeStep('verifyRecoveryPassword')}>verifyRecoveryPassword</button>
-      <button onClick={() => changeStep('setNewPassword')}>setNewPassword</button>
       <Card className="mx-4">
         <CardBody className="p-4">
           {renderStep(step)}
@@ -45,10 +68,8 @@ const RecoveryPassword = (props) => {
 const ConnectedComponent = connect(
   (state) => ({ ...state.auth.recoveryPassword }),
   {
-    changeStep
-  },
-  null,
-  { pure: false }
+
+  }
 )(RecoveryPassword);
 const ComponentWithRouter = withRouter(ConnectedComponent);
 export default ComponentWithRouter;

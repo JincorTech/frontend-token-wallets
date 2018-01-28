@@ -12,7 +12,8 @@ import VerifySignInForm from '../../../components/auth/VerifySignInForm';
 const SignIn = (props) => {
   const {
     step,
-    user
+    user,
+    fetching
   } = props;
 
   const {
@@ -28,12 +29,14 @@ const SignIn = (props) => {
       case 'signIn':
         return (
           <SignInForm
-            onSubmit={signIn}/>
+            onSubmit={signIn}
+            fetching={fetching}/>
         );
       case 'verifySignIn':
         return (
           <VerifySignInForm
             onSubmit={verifySignIn}
+            fetching={fetching}
             initialValues={{
               accessToken,
               verification: {
@@ -73,6 +76,6 @@ const SignIn = (props) => {
 };
 
 const ConnectedComponent = connect((state) =>
-  ({ ...state.auth.signIn }), null, null, { pure: false })(SignIn);
+  ({ ...state.auth.signIn }))(SignIn);
 const ComponentWithRouter = withRouter(ConnectedComponent);
 export default ComponentWithRouter;

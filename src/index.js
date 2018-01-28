@@ -5,12 +5,10 @@ import { ConnectedRouter } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
 
 import 'normalize.css';
-import 'simple-line-icons/css/simple-line-icons.css';
+import 'font-awesome/css/font-awesome.min.css';
 import './assets/coreui/scss/style.scss';
 import './assets/main.css';
 import './assets/fonts/Roboto/stylesheet.css';
-import './assets/images/logo/logo.png';
-import './assets/images/logo/logo-symbol.png';
 
 import configureStore, { history } from './redux/configureStore';
 import routes from './routes';

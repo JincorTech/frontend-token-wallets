@@ -1,35 +1,40 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button, Input, InputGroup } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
+
+import { emailValidate } from '../../../utils/validators';
+
+import RenderInput from '../../forms/RenderInput';
 
 const RecoveryPasswordForm = (props) => {
   const {
-    handleSubmit
+    handleSubmit,
+    invalid,
+    error,
+    fetching
   } = props;
 
-  const renderEmailInput = () => (
-    <InputGroup className="mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          <i className="icon-user"></i>
-        </span>
-      </div>
-      <Input type="email" placeholder="E-mail"/>
-    </InputGroup>
-  );
+  const renderButton = () =>
+    (fetching
+      ? (<Button color="success" disabled={true} block><i className="fa fa-cog fa-spin fa-fw"/> Loading</Button>)
+      : (<Button color="success" disabled={invalid} block>Submit</Button>));
 
   return (
     <form onSubmit={handleSubmit}>
       <h1>Recovery password</h1>
-      <p className="text-muted">ello my queen</p>
+      <p className="text-muted">Enter your email and we send instructions</p>
 
       <Field
-        component={renderEmailInput}
+        component={RenderInput}
+        icon={<i className="fa fa-envelope-o"/>}
         name="email"
-        type="text"
-        placeholder="E-mail"/>
+        type="email"
+        placeholder="E-mail"
+        validate={emailValidate}/>
 
-      <Button color="success" block>Yo, mailin me pls</Button>
+      {error ? <Alert color="danger">{error}</Alert> : null}
+
+      {renderButton()}
     </form>
   );
 };

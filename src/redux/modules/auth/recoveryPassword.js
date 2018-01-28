@@ -14,62 +14,74 @@ export const changeStep = createAction(CHANGE_STEP);
 export const resetStore = createAction(RESET_STORE);
 
 const initialState = from({
-  spinner: false,
-  step: 'recoveryPassword'
+  fetching: false,
+  step: 'recoveryPassword',
+  email: '',
+  code: '',
+  verification: {
+    verificationId: '',
+    consumer: '',
+    expiredOn: 0,
+    status: 0,
+    method: ''
+  }
 });
 
 export default createReducer({
   [recoveryPassword.REQUEST]: (state) => (
     state.merge({
-      spinner: true
+      fetching: true
     })
   ),
 
-  [recoveryPassword.SUCCESS]: (state) => (
+  [recoveryPassword.SUCCESS]: (state, { payload }) => (
     state.merge({
-      spinner: false
+      fetching: false,
+      email: payload.email,
+      verification: payload.verification
     })
   ),
 
   [recoveryPassword.FAILURE]: (state) => (
     state.merge({
-      spinner: false
+      fetching: false
     })
   ),
 
-  [verifyRecoveryPassword.REQUEST]: (state) => (
+  [verifyRecoveryPassword.REQUEST]: (state, { payload }) => (
     state.merge({
-      spinner: true
+      fetching: true,
+      code: payload.code
     })
   ),
 
   [verifyRecoveryPassword.SUCCESS]: (state) => (
     state.merge({
-      spinner: false
+      fetching: false
     })
   ),
 
   [verifyRecoveryPassword.FAILURE]: (state) => (
     state.merge({
-      spinner: false
+      fetching: false
     })
   ),
 
   [setNewPassword.REQUEST]: (state) => (
     state.merge({
-      spinner: true
+      fetching: true
     })
   ),
 
   [setNewPassword.SUCCESS]: (state) => (
     state.merge({
-      spinner: false
+      fetching: false
     })
   ),
 
   [setNewPassword.FAILURE]: (state) => (
     state.merge({
-      spinner: false
+      fetching: false
     })
   ),
 
