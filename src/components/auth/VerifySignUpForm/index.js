@@ -2,7 +2,7 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from 'reactstrap';
 
-import RenderPinInput from '../../forms/RenderPinInput';
+import RenderInput from '../../forms/RenderInput';
 import RenderHiddenInput from '../../forms/RenderHiddenInput';
 
 const VerifySignUpForm = (props) => {
@@ -16,7 +16,8 @@ const VerifySignUpForm = (props) => {
       <p className="text-muted">Verify your email</p>
 
       <Field
-        component={RenderPinInput}
+        component={RenderInput}
+        icon={<i className="icon-lock"/>}
         name="code"
         type="text"
         placeholder="PIN"/>

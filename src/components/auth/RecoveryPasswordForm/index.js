@@ -2,7 +2,7 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from 'reactstrap';
 
-import RenderEmailInput from '../../forms/RenderEmailInput';
+import RenderInput from '../../forms/RenderInput';
 
 const RecoveryPasswordForm = (props) => {
   const {
@@ -15,7 +15,8 @@ const RecoveryPasswordForm = (props) => {
       <p className="text-muted">Enter your email and we send instructions</p>
 
       <Field
-        component={RenderEmailInput}
+        component={RenderInput}
+        icon={<i className="icon-user"/>}
         name="email"
         type="email"
         placeholder="E-mail"/>

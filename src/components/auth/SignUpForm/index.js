@@ -2,8 +2,7 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from 'reactstrap';
 
-import RenderUserField from '../../forms/RenderUserField';
-import RenderEmailInput from '../../forms/RenderEmailInput';
+import RenderInput from '../../forms/RenderInput';
 import RenderPasswordInput from '../../forms/RenderPasswordInput';
 
 const SignUpForm = (props) => {
@@ -17,13 +16,15 @@ const SignUpForm = (props) => {
       <p className="text-muted">Create your account</p>
 
       <Field
-        component={RenderUserField}
+        component={RenderInput}
+        icon={<i className="icon-user"/>}
         name="name"
         type="text"
         placeholder="Your name"/>
 
       <Field
-        component={RenderEmailInput}
+        component={RenderInput}
+        icon={<i className="icon-user"/>}
         name="email"
         type="text"
         placeholder="E-mail"/>

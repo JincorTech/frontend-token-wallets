@@ -5,7 +5,7 @@ import { Row, Col, Button } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
 
-import RenderEmailInput from '../../forms/RenderEmailInput';
+import RenderInput from '../../forms/RenderInput';
 import RenderPasswordInput from '../../forms/RenderPasswordInput';
 
 const SignInForm = (props) => {
@@ -19,7 +19,8 @@ const SignInForm = (props) => {
       <p className="text-muted">Sign In to your account</p>
 
       <Field
-        component={RenderEmailInput}
+        component={RenderInput}
+        icon={<i className="icon-user"/>}
         name="email"
         type="email"
         placeholder="E-mail"/>

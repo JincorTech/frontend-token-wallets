@@ -5,7 +5,7 @@ import { Row, Col, Button } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
 
-import RenderPinInput from '../../forms/RenderPinInput';
+import RenderInput from '../../forms/RenderInput';
 import RenderHiddenInput from '../../forms/RenderHiddenInput';
 
 const VerifySignInForm = (props) => {
@@ -16,11 +16,12 @@ const VerifySignInForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Sign In</h1>
-      <p className="text-muted">Sign In to your account</p>
+      <p className="text-muted">Enter pin from email to verify sign in</p>
 
       <FormSection name="verification">
         <Field
-          component={RenderPinInput}
+          component={RenderInput}
+          icon={<i className="icon-lock"/>}
           name="code"
           type="text"
           placeholder="PIN"/>
