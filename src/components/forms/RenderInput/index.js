@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, InputGroup } from 'reactstrap';
+import { Input, InputGroup, FormFeedback } from 'reactstrap';
 
 const RenderInput = (props) => {
   const {
@@ -9,6 +9,20 @@ const RenderInput = (props) => {
     ...restProps
   } = props;
 
+  const {
+    error,
+    invalid,
+    active,
+    visited
+  } = meta;
+
+  const isValid = () => {
+    if (!active && invalid && visited) return false;
+    if (!invalid) return true;
+
+    return null;
+  };
+
   return (
     <InputGroup className="mb-3">
       <div className="input-group-prepend">
@@ -16,7 +30,8 @@ const RenderInput = (props) => {
           {icon}
         </span>
       </div>
-      <Input meta={meta} {...input} {...restProps}/>
+      <Input valid={isValid()} meta={meta} {...input} {...restProps}/>
+      <FormFeedback>{error}</FormFeedback>
     </InputGroup>
   );
 };

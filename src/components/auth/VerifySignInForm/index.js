@@ -4,13 +4,15 @@ import { reduxForm, Field, FormSection } from 'redux-form';
 import { Row, Col, Button } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
+import { twoFactorCode } from '../../../utils/validators';
 
 import RenderInput from '../../forms/RenderInput';
 import RenderHiddenInput from '../../forms/RenderHiddenInput';
 
 const VerifySignInForm = (props) => {
   const {
-    handleSubmit
+    handleSubmit,
+    invalid
   } = props;
 
   return (
@@ -24,7 +26,8 @@ const VerifySignInForm = (props) => {
           icon={<i className="icon-lock"/>}
           name="code"
           type="text"
-          placeholder="PIN"/>
+          placeholder="PIN"
+          validate={twoFactorCode}/>
 
         <Field
           component={RenderHiddenInput}
@@ -44,7 +47,7 @@ const VerifySignInForm = (props) => {
 
       <Row>
         <Col xs="6">
-          <Button color="primary" className="px-4">Submit</Button>
+          <Button color="primary" className="px-4" disabled={invalid}>Submit</Button>
         </Col>
         <Col xs="6" className="text-right">
           <Link to={namedRoutes.recoveryPassword} color="link" className="btn btn-link px-0">Forgot password?</Link>

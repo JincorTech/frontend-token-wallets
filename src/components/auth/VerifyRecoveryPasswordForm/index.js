@@ -2,11 +2,14 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from 'reactstrap';
 
+import { twoFactorCode } from '../../../utils/validators';
+
 import RenderInput from '../../forms/RenderInput';
 
 const VerifyRecoveryPasswordForm = (props) => {
   const {
-    handleSubmit
+    handleSubmit,
+    invalid
   } = props;
 
   return (
@@ -19,9 +22,10 @@ const VerifyRecoveryPasswordForm = (props) => {
         icon={<i className="icon-lock"/>}
         name="code"
         type="text"
-        placeholder="PIN"/>
+        placeholder="PIN"
+        validate={twoFactorCode}/>
 
-      <Button color="success" block>Submit</Button>
+      <Button color="success" disabled={invalid} block>Submit</Button>
     </form>
   );
 };

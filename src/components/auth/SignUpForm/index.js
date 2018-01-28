@@ -2,12 +2,15 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from 'reactstrap';
 
+import { fullNameValidate, emailValidate, passwordValidate } from '../../../utils/validators';
+
 import RenderInput from '../../forms/RenderInput';
 import RenderPasswordInput from '../../forms/RenderPasswordInput';
 
 const SignUpForm = (props) => {
   const {
-    handleSubmit
+    handleSubmit,
+    invalid
   } = props;
 
   return (
@@ -20,22 +23,25 @@ const SignUpForm = (props) => {
         icon={<i className="icon-user"/>}
         name="name"
         type="text"
-        placeholder="Your name"/>
+        placeholder="Your name"
+        validate={fullNameValidate}/>
 
       <Field
         component={RenderInput}
         icon={<i className="icon-user"/>}
         name="email"
-        type="text"
-        placeholder="E-mail"/>
+        type="email"
+        placeholder="E-mail"
+        validate={emailValidate}/>
 
       <Field
         component={RenderPasswordInput}
         name="password"
         type="password"
-        placeholder="Password"/>
+        placeholder="Password"
+        validate={passwordValidate}/>
 
-      <Button color="success" block>Create Account</Button>
+      <Button color="success" disabled={invalid} block>Create Account</Button>
     </form>
   );
 };

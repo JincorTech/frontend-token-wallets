@@ -2,11 +2,14 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from 'reactstrap';
 
+import { emailValidate } from '../../../utils/validators';
+
 import RenderInput from '../../forms/RenderInput';
 
 const RecoveryPasswordForm = (props) => {
   const {
-    handleSubmit
+    handleSubmit,
+    invalid
   } = props;
 
   return (
@@ -19,9 +22,10 @@ const RecoveryPasswordForm = (props) => {
         icon={<i className="icon-user"/>}
         name="email"
         type="email"
-        placeholder="E-mail"/>
+        placeholder="E-mail"
+        validate={emailValidate}/>
 
-      <Button color="success" block>Submit</Button>
+      <Button color="success" disabled={invalid} block>Submit</Button>
     </form>
   );
 };

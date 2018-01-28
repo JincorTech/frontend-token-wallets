@@ -2,11 +2,14 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from 'reactstrap';
 
+import { passwordValidate } from '../../../utils/validators';
+
 import RenderPasswordInput from '../../forms/RenderPasswordInput';
 
 const SetNewPasswordForm = (props) => {
   const {
-    handleSubmit
+    handleSubmit,
+    invalid
   } = props;
 
   return (
@@ -18,9 +21,10 @@ const SetNewPasswordForm = (props) => {
         component={RenderPasswordInput}
         name="password"
         type="password"
-        placeholder="New password"/>
+        placeholder="New password"
+        validate={passwordValidate}/>
 
-      <Button color="success" block>Change password</Button>
+      <Button color="success" disabled={invalid} block>Change password</Button>
     </form>
   );
 };
