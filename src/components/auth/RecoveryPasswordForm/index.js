@@ -20,7 +20,7 @@ const RecoveryPasswordForm = (props) => {
 
       <Field
         component={RenderInput}
-        icon={<i className="icon-user"/>}
+        icon={<i className="fa fa-envelope-o"/>}
         name="email"
         type="email"
         placeholder="E-mail"

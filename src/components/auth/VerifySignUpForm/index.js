@@ -21,7 +21,7 @@ const VerifySignUpForm = (props) => {
 
       <Field
         component={RenderInput}
-        icon={<i className="icon-lock"/>}
+        icon={<i className="fa fa-key fa-fw"/>}
         name="code"
         type="text"
         placeholder="PIN"

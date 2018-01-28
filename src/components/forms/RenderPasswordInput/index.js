@@ -22,7 +22,7 @@ const RenderPasswordInput = (props) => {
     <InputGroup className="mb-3">
       <div className="input-group-prepend">
         <span className="input-group-text">
-          <i className="icon-lock"></i>
+          <i className="fa fa-lock fa-fw"></i>
         </span>
       </div>
       <Input valid={isValid()} type="password" meta={meta} {...input} {...restProps}/>

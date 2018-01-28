@@ -24,7 +24,7 @@ const VerifySignInForm = (props) => {
       <FormSection name="verification">
         <Field
           component={RenderInput}
-          icon={<i className="icon-lock"/>}
+          icon={<i className="fa fa-key fa-fw"/>}
           name="code"
           type="text"
           placeholder="PIN"

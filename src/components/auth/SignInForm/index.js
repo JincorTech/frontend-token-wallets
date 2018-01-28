@@ -23,7 +23,7 @@ const SignInForm = (props) => {
 
       <Field
         component={RenderInput}
-        icon={<i className="icon-user"/>}
+        icon={<i className="fa fa-envelope fa-fw"/>}
         name="email"
         type="email"
         placeholder="E-mail"

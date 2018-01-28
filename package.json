@@ -25,6 +25,7 @@
     "bootstrap": "^4.0.0",
     "classnames": "^2.2.5",
     "file-loader": "^1.1.6",
+    "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
     "node-sass": "^4.7.2",
     "normalize.css": "^7.0.0",
@@ -44,7 +45,6 @@
     "redux-seamless-immutable": "^0.3.2",
     "sass-loader": "^6.0.6",
     "seamless-immutable": "^7.1.2",
-    "simple-line-icons": "^2.4.1",
     "url-loader": "^0.6.2",
     "whatwg-fetch": "^2.0.3"
   },
