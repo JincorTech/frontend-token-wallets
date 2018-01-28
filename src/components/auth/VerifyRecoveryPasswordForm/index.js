@@ -1,6 +1,6 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
 
 import { twoFactorCode } from '../../../utils/validators';
 
@@ -9,7 +9,8 @@ import RenderInput from '../../forms/RenderInput';
 const VerifyRecoveryPasswordForm = (props) => {
   const {
     handleSubmit,
-    invalid
+    invalid,
+    error
   } = props;
 
   return (
@@ -24,6 +25,8 @@ const VerifyRecoveryPasswordForm = (props) => {
         type="text"
         placeholder="PIN"
         validate={twoFactorCode}/>
+
+      {error ? <Alert color="danger">{error}</Alert> : null}
 
       <Button color="success" disabled={invalid} block>Submit</Button>
     </form>

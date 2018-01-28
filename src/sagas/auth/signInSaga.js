@@ -1,5 +1,6 @@
 import { all, takeLatest, call, put, fork } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
+import { SubmissionError } from 'redux-form';
 import { post } from '../../utils/fetch';
 import { namedRoutes } from '../../routes';
 
@@ -13,7 +14,7 @@ function* signInIterator({ payload }) {
     yield put(signIn.success(data));
     yield put(changeStep('verifySignIn'));
   } catch (e) {
-    yield call(console.error, e);
+    yield put(signIn.failure(new SubmissionError({ _error: e.message })));
   }
 }
 
@@ -33,7 +34,7 @@ function* verifySignInIterator({ payload }) {
     yield put(resetStore());
     yield put(push(namedRoutes.dashboard));
   } catch (e) {
-    yield call(console.error, e);
+    yield put(verifySignIn.failure(new SubmissionError({ _error: e.message })));
   }
 }
 

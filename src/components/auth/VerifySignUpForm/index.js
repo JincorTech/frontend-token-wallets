@@ -1,6 +1,6 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
 
 import { twoFactorCode } from '../../../utils/validators';
 
@@ -10,7 +10,8 @@ import RenderHiddenInput from '../../forms/RenderHiddenInput';
 const VerifySignUpForm = (props) => {
   const {
     handleSubmit,
-    invalid
+    invalid,
+    error
   } = props;
 
   return (
@@ -37,6 +38,8 @@ const VerifySignUpForm = (props) => {
         name="verificationId"
         type="hidden"
         disabled/>
+
+      {error ? <Alert color="danger">{error}</Alert> : null}
 
       <Button color="success" disabled={invalid} block>Submit</Button>
     </form>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
 
 import { fullNameValidate, emailValidate, passwordValidate } from '../../../utils/validators';
 
@@ -10,7 +10,8 @@ import RenderPasswordInput from '../../forms/RenderPasswordInput';
 const SignUpForm = (props) => {
   const {
     handleSubmit,
-    invalid
+    invalid,
+    error
   } = props;
 
   return (
@@ -40,6 +41,8 @@ const SignUpForm = (props) => {
         type="password"
         placeholder="Password"
         validate={passwordValidate}/>
+
+      {error ? <Alert color="danger">{error}</Alert> : null}
 
       <Button color="success" disabled={invalid} block>Create Account</Button>
     </form>

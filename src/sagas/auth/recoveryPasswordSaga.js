@@ -1,5 +1,6 @@
 import { all, takeLatest, call, put, fork } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
+import { SubmissionError } from 'redux-form';
 import { post } from '../../utils/fetch';
 import { namedRoutes } from '../../routes';
 
@@ -19,7 +20,7 @@ function* recoveryPasswordIterator({ payload }) {
     yield put(recoveryPassword.success(body));
     yield put(changeStep('verifyRecoveryPassword'));
   } catch (e) {
-    yield call(console.error, e);
+    yield put(recoveryPassword.failure(new SubmissionError({ _error: e.message })));
   }
 }
 
@@ -36,7 +37,7 @@ function* verifyRecoveryPasswordIterator({ payload }) {
     yield put(verifyRecoveryPassword.success(payload));
     yield put(changeStep('setNewPassword'));
   } catch (e) {
-    yield call(console.error, e);
+    yield call(console.log, e);
   }
 }
 
@@ -55,7 +56,7 @@ function* setNewPasswordIterator({ payload }) {
     yield put(resetStore());
     yield put(push(namedRoutes.signIn));
   } catch (e) {
-    yield call(console.error, e);
+    yield put(setNewPassword.failure(new SubmissionError({ _error: e.message })));
   }
 }
 

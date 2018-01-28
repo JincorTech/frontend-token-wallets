@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field, FormSection } from 'redux-form';
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col, Button, Alert } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
 import { twoFactorCode } from '../../../utils/validators';
@@ -12,7 +12,8 @@ import RenderHiddenInput from '../../forms/RenderHiddenInput';
 const VerifySignInForm = (props) => {
   const {
     handleSubmit,
-    invalid
+    invalid,
+    error
   } = props;
 
   return (
@@ -44,6 +45,8 @@ const VerifySignInForm = (props) => {
         component={RenderHiddenInput}
         name="accessToken"
         type="hidden"/>
+
+      {error ? <Alert color="danger">{error}</Alert> : null}
 
       <Row>
         <Col xs="6">
