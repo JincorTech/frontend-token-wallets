@@ -5,6 +5,8 @@ import { Row, Col, Card, CardHeader, CardBody, Table } from 'reactstrap';
 
 import { fetchBalances } from '../../../redux/modules/app/dashboard';
 
+import RegisterToken from '../RegisterToken';
+
 class Dashboard extends Component {
   componentDidMount() {
     const { fetchBalances } = this.props;
@@ -57,6 +59,8 @@ class Dashboard extends Component {
           <Col xs="12" lg="3"></Col>
 
           <Col xs="12" lg="4">
+            <RegisterToken/>
+
             <Card className="bg-white">
               <CardHeader>
                 <h4 className="my-0">Balances</h4>
