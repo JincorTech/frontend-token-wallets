@@ -9,7 +9,7 @@ function* fetchBalancesIterator() {
     const data = yield call(get, '/dashboard');
     yield put(fetchBalances.success(data));
   } catch (e) {
-    yield call(console.error, e);
+    yield call(console.log, e);
   }
 }
 

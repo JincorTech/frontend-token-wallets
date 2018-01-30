@@ -2,15 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 
-import { changeStep } from '../../../redux/modules/app/registerToken';
+import { fetchTokenInfo, registerToken } from '../../../redux/modules/app/registerToken';
 
 import RegisterTokenAddressForm from '../../../components/app/RegisterTokenAddressForm';
 import RegisterTokenForm from '../../../components/app/RegisterTokenForm';
 
 const RegisterToken = (props) => {
   const {
+    fetching,
     step,
-    changeStep
+    token
   } = props;
 
   const renderStep = (currentStep) => {
@@ -18,20 +19,15 @@ const RegisterToken = (props) => {
       case 'registerTokenAddress':
         return (
           <RegisterTokenAddressForm
-            onSubmit={null}
-            fetching={false}/>
+            onSubmit={fetchTokenInfo}
+            fetching={fetching}/>
         );
       case 'registerToken':
         return (
           <RegisterTokenForm
-            onSubmit={null}
-            fetching={false}
-            initialValues={{
-              contractAddress: 'contractAddress init val',
-              name: 'name init val',
-              symbol: 'symbol init val',
-              decimals: 18
-            }}/>
+            onSubmit={registerToken}
+            fetching={fetching}
+            initialValues={token}/>
         );
       default:
         return 'Something went wrong';
@@ -40,8 +36,6 @@ const RegisterToken = (props) => {
 
   return (
     <Card>
-      <button onClick={() => changeStep('registerTokenAddress')}>1</button>
-      <button onClick={() => changeStep('registerToken')}>2</button>
       <CardHeader>
         <h4 className="my-0">Add token</h4>
       </CardHeader>
@@ -54,7 +48,5 @@ const RegisterToken = (props) => {
 
 export default connect(
   (state) => ({ ...state.app.registerToken }),
-  {
-    changeStep
-  }
+  {}
 )(RegisterToken);

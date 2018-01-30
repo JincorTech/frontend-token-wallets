@@ -1,13 +1,13 @@
 import { from } from 'seamless-immutable';
-import { createReducer, createAction, createAsyncAction } from '../../../utils/actions';
+import { createReducer, createAction, createSubmitAction } from '../../../utils/actions';
 
 export const FETCH_TOKEN_INFO = 'app/registerToken/FETCH_TOKEN_INFO';
 export const REGISTER_TOKEN = 'app/registerToken/REGISTER_TOKEN';
 export const CHANGE_STEP = 'app/registerToken/CHANGE_STEP';
 export const RESET_STORE = 'app/registerToken/RESET_STORE';
 
-export const fetchTokenInfo = createAsyncAction(FETCH_TOKEN_INFO);
-export const registerToken = createAsyncAction(REGISTER_TOKEN);
+export const fetchTokenInfo = createSubmitAction(FETCH_TOKEN_INFO);
+export const registerToken = createSubmitAction(REGISTER_TOKEN);
 export const changeStep = createAction(CHANGE_STEP);
 export const resetStore = createAction(RESET_STORE);
 
@@ -30,7 +30,7 @@ export default createReducer({
   ),
 
   [fetchTokenInfo.SUCCESS]: (state, { payload }) => (
-    state.mege({
+    state.merge({
       fetching: false,
       token: payload
     })
