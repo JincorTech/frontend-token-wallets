@@ -7,7 +7,7 @@ export class RequestError extends Error {
     super(error.error);
 
     this.errors = error.errors;
-    this.status = error.status_code;
+    this.status = error.status;
   }
 }
 

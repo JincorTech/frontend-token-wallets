@@ -7,7 +7,8 @@ export const fetchBalances = createAsyncAction(FETCH_BALANCES);
 
 const initialState = from({
   ethBalance: '',
-  erc20TokenBalance: ''
+  lbrsBalance: '',
+  erc20TokensBalance: []
 });
 
 export default createReducer({
