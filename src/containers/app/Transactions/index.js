@@ -17,13 +17,24 @@ const Transactions = (props) => {
     tx
   } = props;
 
+  // const renderTxs = () => txs
+  //   .sort((a, b) => a.timestamp - b.timestamp)
+  //   .map((tx) => <Tx key={tx.id} tx={tx} openTxPopup={openTxPopup}/>);
+
+  const renderTxs = () => {
+    const sorted = Array.from(txs);
+    return sorted
+      .sort((a, b) => b.timestamp - a.timestamp)
+      .map((tx) => <Tx key={tx.id} tx={tx} openTxPopup={openTxPopup}/>);
+  };
+
   return (
     <div className="animated fadeIn mt-4">
       <Row>
         <Col xs="12" lg="5">
           <Card>
             <CardBody>
-              {txs.map((tx) => <Tx key={tx.id} tx={tx} openTxPopup={openTxPopup}/>)}
+              {renderTxs()}
             </CardBody>
           </Card>
         </Col>
