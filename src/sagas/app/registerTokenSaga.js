@@ -12,7 +12,13 @@ function* fetchTokenInfoIterator({ payload }) {
     yield put(fetchTokenInfo.success(data));
     yield put(changeStep('registerToken'));
   } catch (e) {
-    yield put(fetchTokenInfo.failure(new SubmissionError({ _error: e.message })));
+    yield call(console.log, e.status);
+    if (e.status === 404) {
+      yield put(fetchTokenInfo.success(payload));
+      yield put(changeStep('registerToken'));
+    } else {
+      yield put(fetchTokenInfo.failure(new SubmissionError({ _error: e.message })));
+    }
   }
 }
 
