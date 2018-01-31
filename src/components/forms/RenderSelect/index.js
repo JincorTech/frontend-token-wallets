@@ -6,7 +6,7 @@ const RenderInput = (props) => {
     input,
     meta,
     icon,
-    pure,
+    options,
     ...restProps
   } = props;
 
@@ -24,18 +24,12 @@ const RenderInput = (props) => {
     return null;
   };
 
-  if (pure) {
-    return (<Input valid={isValid()} meta={meta} {...input} {...restProps}/>);
-  }
-
   return (
     <InputGroup className="mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
-          {icon}
-        </span>
-      </div>
-      <Input valid={isValid()} meta={meta} {...input} {...restProps}/>
+      <Input type="select" valid={isValid()} meta={meta} {...input} {...restProps}>
+        {options.map(({ value, label }) =>
+          <option value={value} key={value}>{label}</option>)}
+      </Input>
       <FormFeedback>{error}</FormFeedback>
     </InputGroup>
   );

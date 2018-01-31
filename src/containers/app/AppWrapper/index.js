@@ -9,9 +9,9 @@ import { logout, fetchUser } from '../../../redux/modules/app/app';
 import Header from '../../../components/app/Header';
 import Sidebar from '../../../components/app/Sidebar';
 
-import Dashboard from '../../../containers/app/Dashboard';
-import TransferTokens from '../../../components/app/TokenTransfer';
-import Transactions from '../../../containers/app/Transactions';
+import Dashboard from '../Dashboard';
+import TransferTokens from '../TokenTransfer';
+import Transactions from '../Transactions';
 import Settings from '../../../components/app/Settings';
 
 class AppWrapper extends Component {

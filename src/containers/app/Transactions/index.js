@@ -4,8 +4,8 @@ import { Row, Col, Card, CardBody } from 'reactstrap';
 
 import { openTxPopup, closeTxPopup, toggleTxPopup } from '../../../redux/modules/app/txPopup';
 
-import Tx from '../../../components/Transactions/Tx';
-import TxPopup from '../../../components/Transactions/TxPopup';
+import Tx from '../../../components/app/Tx';
+import TxPopup from '../../../components/app/TxPopup';
 
 const Transactions = (props) => {
   const {
@@ -16,10 +16,6 @@ const Transactions = (props) => {
     txs,
     tx
   } = props;
-
-  // const renderTxs = () => txs
-  //   .sort((a, b) => a.timestamp - b.timestamp)
-  //   .map((tx) => <Tx key={tx.id} tx={tx} openTxPopup={openTxPopup}/>);
 
   const renderTxs = () => {
     const sorted = Array.from(txs);
