@@ -11,7 +11,7 @@ import Sidebar from '../../../components/app/Sidebar';
 
 import Dashboard from '../../../containers/app/Dashboard';
 import TransferTokens from '../../../components/app/TokenTransfer';
-import Transactions from '../../../components/app/Transactions';
+import Transactions from '../../../containers/app/Transactions';
 import Settings from '../../../components/app/Settings';
 
 class AppWrapper extends Component {
