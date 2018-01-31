@@ -3,6 +3,7 @@ import { SubmissionError } from 'redux-form';
 import { get, post } from '../../utils/fetch';
 
 import { fetchTokenInfo, registerToken, changeStep, resetStore } from '../../redux/modules/app/registerToken';
+import { fetchBalances } from '../../redux/modules/app/dashboard';
 
 
 function* fetchTokenInfoIterator({ payload }) {
@@ -27,6 +28,7 @@ function* registerTokenIterator({ payload }) {
   try {
     yield call(post, '/user/me/erc20token/register', payload);
     yield put(registerToken.success());
+    yield put(fetchBalances());
     yield put(resetStore());
   } catch (e) {
     yield put(registerToken.failure(new SubmissionError({ _error: e.message })));
