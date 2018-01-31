@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { format } from 'date-fns';
 import { Card, CardBody, CardFooter, Badge } from 'reactstrap';
 
 import { shortAddress } from '../../../utils/blockchain';
@@ -13,7 +14,7 @@ const defaultProps = {
   amount: 0,
   status: '',
   type: '',
-  direction: '', // in or out
+  direction: '',
   token: {
     contractAddress: '',
     symbol: '',
@@ -25,35 +26,29 @@ const defaultProps = {
 class Tx extends Component {
   render() {
     const {
-      className,
-      cssModule,
-      header,
-      mainText,
-      icon,
-      color,
-      footer,
-      link,
-      children,
-      variant,
+      openTxPopup,
+      tx
+    } = this.props;
 
+    const {
+      timestamp,
       direction,
       status,
       amount,
       type,
       token,
-      ...attributes
-    } = this.props;
+    } = tx;
 
     const renderStatus = () => {
       if (status === 'pending') {
         return (<Badge color="info" className="pull-right text-white"><i className="fa fa-cog fa-spin fa-fw"/> Pending</Badge>);
       }
 
-      if (status === 'failure') {
+      if (status === 'failed') {
         return (<Badge color="danger" className="pull-right text-white"><i className="fa fa-times fa-fw"/> Failure</Badge>);
       }
 
-      if (status === 'success') {
+      if (status === 'confirmed') {
         return (<Badge color="success" className="pull-right text-white"><i className="fa fa-check fa-fw"/> Success</Badge>);
       }
 
@@ -80,16 +75,16 @@ class Tx extends Component {
       return dir(<span>{amount} <a href={'https://etherscan.io'}>{shortAddress(token.contractAddress)}</a></span>);
     };
 
-    const renderTs = () => '12 Feb 2016';
+    const renderTs = () => format(new Date(timestamp * 1000), 'HH:mm | DD MMMM YYYY');
 
     return (
       <Card>
-        <CardBody className="clearfix p-3" {...attributes}>
+        <CardBody className="clearfix p-3">
           <div className="h5">{renderStatus()} {renderHeader()}</div>
           <div className="text-muted text-uppercase font-weight-bold font-xs">{renderTs()}</div>
         </CardBody>
         <CardFooter className="px-3 py-2">
-          <a className="font-weight-bold font-xs btn-block text-muted" href={link}>
+          <a className="font-weight-bold font-xs btn-block text-muted" style={{ cursor: 'pointer' }} onClick={() => openTxPopup(tx)}>
             View details
             <i className="fa fa-angle-right float-right font-lg"></i>
           </a>

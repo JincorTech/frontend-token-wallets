@@ -15,10 +15,6 @@ class Sidebar extends Component {
     this.hideMobile = this.hideMobile.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   handleClick(e) {
     e.preventDefault();
     e.target.parentElement.classList.toggle('open');
