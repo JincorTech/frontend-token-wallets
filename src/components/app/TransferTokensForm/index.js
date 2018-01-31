@@ -1,6 +1,8 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import {
+  Row,
+  Col,
   Form,
   FormGroup,
   Label,
@@ -29,40 +31,50 @@ const TransferTokensForm = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <FormGroup>
-        <Label>Recipient address</Label>
+      <Row>
+        <Col xs={12}>
+          <FormGroup>
+            <Label>Recipient address</Label>
 
-        <Field
-          component={RenderInput}
-          icon={<i className="fa fa-user fa-fw"/>}
-          name="to"
-          type="text"
-          placeholder="Recipient address"
-          validate={required}/>
-      </FormGroup>
+            <Field
+              component={RenderInput}
+              icon={<i className="fa fa-user fa-fw"/>}
+              name="to"
+              type="text"
+              placeholder="Recipient address"
+              validate={required}/>
+          </FormGroup>
+        </Col>
+      </Row>
 
-      <FormGroup>
-        <Label>Amount</Label>
+      <Row>
+        <Col xs={8}>
+          <FormGroup>
+            <Label>Amount</Label>
 
-        <Field
-          component={RenderInput}
-          icon={<i className="fa fa-money fa-fw"/>}
-          name="amount"
-          type="text"
-          placeholder="Amount"
-          validate={number}/>
-      </FormGroup>
+            <Field
+              component={RenderInput}
+              icon={<i className="fa fa-money fa-fw"/>}
+              name="amount"
+              type="text"
+              placeholder="Amount"
+              validate={number}/>
+          </FormGroup>
+        </Col>
 
-      <FormGroup>
-        <Label>Currency</Label>
+        <Col xs={4}>
+          <FormGroup>
+            <Label>Currency</Label>
 
-        <Field
-          component={RenderSelect}
-          icon={<i className="fa fa-money fa-fw"/>}
-          name="type"
-          validate={required}
-          options={currencies}/>
-      </FormGroup>
+            <Field
+              component={RenderSelect}
+              icon={<i className="fa fa-money fa-fw"/>}
+              name="type"
+              validate={required}
+              options={currencies}/>
+          </FormGroup>
+        </Col>
+      </Row>
 
       {error ? <Alert color="danger">{error}</Alert> : null}
 

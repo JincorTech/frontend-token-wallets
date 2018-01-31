@@ -6,7 +6,6 @@ const RenderInput = (props) => {
     input,
     meta,
     icon,
-    pure,
     ...restProps
   } = props;
 
@@ -23,10 +22,6 @@ const RenderInput = (props) => {
 
     return null;
   };
-
-  if (pure) {
-    return (<Input valid={isValid()} meta={meta} {...input} {...restProps}/>);
-  }
 
   return (
     <InputGroup className="mb-3">
