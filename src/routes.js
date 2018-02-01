@@ -1,11 +1,14 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+import { isAuth, isNotAuth } from './utils/auth/authWrappers';
 
 import App from './containers/app/App';
 import AppWrapper from './containers/app/AppWrapper';
 import AuthWrapper from './components/auth/AuthWrapper';
 
 export const namedRoutes = {
+  base: '/',
   auth: '/auth',
   signIn: '/auth/signin',
   signUp: '/auth/signup',
@@ -17,11 +20,17 @@ export const namedRoutes = {
   settings: '/app/settings'
 };
 
+const AuthWrapped = isNotAuth(AuthWrapper);
+const AppWrapped = isAuth(AppWrapper);
+
 const routes = (
   <div>
     <App>
-      <Route path={namedRoutes.auth} component={AuthWrapper}/>
-      <Route path={namedRoutes.app} component={AppWrapper}/>
+      <Switch>
+        <Route path={namedRoutes.auth} component={AuthWrapped}/>
+        <Route path={namedRoutes.app} component={AppWrapped}/>
+        <Redirect from={namedRoutes.base} to={namedRoutes.signIn}/>
+      </Switch>
     </App>
   </div>
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, FormSection } from 'redux-form';
 import { Button, Alert } from 'reactstrap';
 
 import { twoFactorCode } from '../../../utils/validators';
@@ -25,25 +25,21 @@ const VerifySignUpForm = (props) => {
       <h1>Sign Up</h1>
       <p className="text-muted">Verify your email</p>
 
-      <Field
-        component={RenderInput}
-        icon={<i className="fa fa-key fa-fw"/>}
-        name="code"
-        type="text"
-        placeholder="PIN"
-        validate={twoFactorCode}/>
-
-      <Field
-        component={RenderHiddenInput}
-        name="email"
-        type="hidden"
-        disabled/>
+      <FormSection name="verification">
+        <Field
+          component={RenderInput}
+          icon={<i className="fa fa-key fa-fw"/>}
+          name="code"
+          type="text"
+          placeholder="PIN"
+          validate={twoFactorCode}/>
 
         <Field
-        component={RenderHiddenInput}
-        name="verificationId"
-        type="hidden"
-        disabled/>
+          component={RenderHiddenInput}
+          name="verificationId"
+          type="hidden"
+          disabled/>
+      </FormSection>
 
       {error ? <Alert color="danger">{error}</Alert> : null}
 
@@ -55,9 +51,10 @@ const VerifySignUpForm = (props) => {
 const FormComponent = reduxForm({
   form: 'verifySignUp',
   initialValues: {
-    email: '',
-    verificationId: '',
-    code: ''
+    verification: {
+      verificationId: '',
+      code: ''
+    }
   }
 })(VerifySignUpForm);
 

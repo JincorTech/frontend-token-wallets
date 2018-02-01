@@ -16,13 +16,6 @@ const SignUp = (props) => {
     fetching
   } = props;
 
-  const {
-    email,
-    verification: {
-      id
-    }
-  } = user;
-
   const renderStep = (currentStep) => {
     switch (currentStep) {
       case 'signUp':
@@ -37,8 +30,9 @@ const SignUp = (props) => {
             onSubmit={verifySignUp}
             fetching={fetching}
             initialValues={{
-              email,
-              verificationId: id
+              verification: {
+                verificationId: user.verification.verificationId
+              }
             }}/>
         );
       default:

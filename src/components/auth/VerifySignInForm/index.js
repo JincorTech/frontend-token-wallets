@@ -38,19 +38,9 @@ const VerifySignInForm = (props) => {
 
         <Field
           component={RenderHiddenInput}
-          name="id"
-          type="hidden"/>
-
-        <Field
-          component={RenderHiddenInput}
-          name="method"
+          name="verificationId"
           type="hidden"/>
       </FormSection>
-
-      <Field
-        component={RenderHiddenInput}
-        name="accessToken"
-        type="hidden"/>
 
       {error ? <Alert color="danger">{error}</Alert> : null}
 
@@ -69,11 +59,9 @@ const VerifySignInForm = (props) => {
 const FormComponent = reduxForm({
   form: 'verifySignIn',
   initialValues: {
-    accessToken: '',
     verification: {
-      id: '',
-      code: '',
-      method: ''
+      verificationId: '',
+      code: ''
     }
   }
 })(VerifySignInForm);

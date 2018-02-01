@@ -7,11 +7,17 @@ import { fetchBalances } from '../../../redux/modules/app/dashboard';
 
 import RegisterToken from '../RegisterToken';
 
+let fetchRepeater;
+
 class Dashboard extends Component {
   componentDidMount() {
     const { fetchBalances } = this.props;
-
     fetchBalances();
+    fetchRepeater = setInterval(fetchBalances, 15000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(fetchRepeater);
   }
 
   render() {
@@ -34,7 +40,7 @@ class Dashboard extends Component {
     return (
       <div className="animated fadeIn mt-4">
         <Row>
-          <Col xs="12" lg="5">
+          <Col xs="12" lg="4">
             <Card className="text-black bg-white">
               <CardBody>
                 <h2 className="mb-2">Hello, {name}!</h2>
@@ -64,7 +70,7 @@ class Dashboard extends Component {
             </Card>
           </Col>
 
-          <Col xs="12" lg="3">
+          <Col xs="12" lg="4">
             <Card className="bg-white">
               <CardHeader>
                 <h4 className="my-0">Balances</h4>

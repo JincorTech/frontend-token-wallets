@@ -16,14 +16,6 @@ const SignIn = (props) => {
     fetching
   } = props;
 
-  const {
-    accessToken,
-    verification: {
-      verificationId,
-      method
-    }
-  } = user;
-
   const renderStep = (currentStep) => {
     switch (currentStep) {
       case 'signIn':
@@ -38,10 +30,8 @@ const SignIn = (props) => {
             onSubmit={verifySignIn}
             fetching={fetching}
             initialValues={{
-              accessToken,
               verification: {
-                id: verificationId,
-                method
+                verificationId: user.verification.verificationId
               }
             }}/>
         );

@@ -5,6 +5,7 @@ import { Button, Alert } from 'reactstrap';
 import { passwordValidate } from '../../../utils/validators';
 
 import RenderPasswordInput from '../../forms/RenderPasswordInput';
+import RenderHiddenInput from '../../forms/RenderHiddenInput';
 
 const SetNewPasswordForm = (props) => {
   const {
@@ -31,6 +32,16 @@ const SetNewPasswordForm = (props) => {
         placeholder="New password"
         validate={passwordValidate}/>
 
+      <Field
+        component={RenderHiddenInput}
+        name="email"
+        type="hidden"/>
+
+      <Field
+        component={RenderHiddenInput}
+        name="resetId"
+        type="hidden"/>
+
       {error ? <Alert color="danger">{error}</Alert> : null}
 
       {renderButton()}
@@ -43,11 +54,7 @@ const FormComponent = reduxForm({
   initialValues: {
     email: '',
     password: '',
-    verification: {
-      method: '',
-      verificationId: '',
-      code: ''
-    }
+    resetId: ''
   }
 })(SetNewPasswordForm);
 

@@ -6,7 +6,7 @@ const RenderHiddenInput = (props) => {
 
   return (
     <div>
-      <Input meta={meta} {...input} {...restProps}/>
+      <Input meta={meta} {...input} {...restProps} type="hidden"/>
     </div>
   );
 };

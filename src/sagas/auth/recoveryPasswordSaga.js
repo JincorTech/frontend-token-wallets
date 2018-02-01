@@ -34,10 +34,11 @@ function* recoveryPasswordSaga() {
 
 function* verifyRecoveryPasswordIterator({ payload }) {
   try {
-    yield put(verifyRecoveryPassword.success(payload));
+    const { resetId } = yield call(post, '/user/resetPassword/verify', payload);
+    yield put(verifyRecoveryPassword.success(resetId));
     yield put(changeStep('setNewPassword'));
   } catch (e) {
-    yield call(console.log, e);
+    yield put(verifyRecoveryPassword.failure(new SubmissionError({ _error: e.message })));
   }
 }
 
@@ -51,7 +52,7 @@ function* verifyRecoveryPasswordSaga() {
 
 function* setNewPasswordIterator({ payload }) {
   try {
-    yield call(post, '/user/resetPassword/verify', payload);
+    yield call(post, '/user/resetPassword/enter', payload);
     yield put(setNewPassword.success());
     yield put(resetStore());
     yield put(push(namedRoutes.signIn));

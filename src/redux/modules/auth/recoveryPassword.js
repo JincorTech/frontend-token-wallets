@@ -18,11 +18,9 @@ const initialState = from({
   step: 'recoveryPassword',
   email: '',
   code: '',
+  resetId: '',
   verification: {
     verificationId: '',
-    consumer: '',
-    expiredOn: 0,
-    status: 0,
     method: ''
   }
 });
@@ -48,16 +46,16 @@ export default createReducer({
     })
   ),
 
-  [verifyRecoveryPassword.REQUEST]: (state, { payload }) => (
+  [verifyRecoveryPassword.REQUEST]: (state) => (
     state.merge({
-      fetching: true,
-      code: payload.code
+      fetching: true
     })
   ),
 
-  [verifyRecoveryPassword.SUCCESS]: (state) => (
+  [verifyRecoveryPassword.SUCCESS]: (state, { payload }) => (
     state.merge({
-      fetching: false
+      fetching: false,
+      resetId: payload
     })
   ),
 
