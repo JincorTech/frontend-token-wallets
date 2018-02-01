@@ -7,11 +7,17 @@ import { fetchBalances } from '../../../redux/modules/app/dashboard';
 
 import RegisterToken from '../RegisterToken';
 
+let fetchRepeater;
+
 class Dashboard extends Component {
   componentDidMount() {
     const { fetchBalances } = this.props;
-
     fetchBalances();
+    fetchRepeater = setInterval(fetchBalances, 15000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(fetchRepeater);
   }
 
   render() {
