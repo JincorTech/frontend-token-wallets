@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Row, Col, Card, CardBody } from 'reactstrap';
 
 import { fetchBalances } from '../../../redux/modules/app/dashboard';
-import { changeStep } from '../../../redux/modules/app/transferTokens';
+import { initTransferTokens, verifyTransferTokensm, changeStep } from '../../../redux/modules/app/transferTokens';
 
 import TokenTransferForm from '../../../components/app/TransferTokensForm';
 import VerifyTransferTokenForm from '../../../components/app/VerifyTransferTokensForm';
@@ -33,14 +33,14 @@ class TokenTransfer extends Component {
         case 'transferTokens':
           return (
             <TokenTransferForm
-              onSubmit={() => {}}
+              onSubmit={initTransferTokens}
               fetching={false}
               currencies={currencies}/>
           );
         case 'verifyTransferTokens':
           return (
             <VerifyTransferTokenForm
-              onSubmit={() => {}}
+              onSubmit={verifyTransferTokensm}
               fetching={false}
               initialValues={{}}/>
           );

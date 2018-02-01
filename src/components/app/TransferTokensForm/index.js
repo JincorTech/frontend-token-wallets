@@ -69,7 +69,7 @@ const TransferTokensForm = (props) => {
             <Field
               component={RenderSelect}
               icon={<i className="fa fa-money fa-fw"/>}
-              name="type"
+              name="currency"
               validate={required}
               options={currencies}/>
           </FormGroup>
@@ -90,8 +90,7 @@ const FormComponent = reduxForm({
   initialValues: {
     to: '',
     amount: '',
-    type: '',
-    contractAddress: ''
+    currency: ''
   }
 })(TransferTokensForm);
 
