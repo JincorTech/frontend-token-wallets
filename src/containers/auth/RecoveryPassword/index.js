@@ -12,13 +12,10 @@ import SetNewPasswordForm from '../../../components/auth/SetNewPasswordForm';
 const RecoveryPassword = (props) => {
   const {
     step,
-    code,
     email,
     fetching,
-    verification: {
-      verificationId,
-      method
-    }
+    verification,
+    resetId
   } = props;
 
   const renderStep = (currentStep) => {
@@ -33,7 +30,13 @@ const RecoveryPassword = (props) => {
         return (
           <VerifyRecoveryPasswordForm
             onSubmit={verifyRecoveryPassword}
-            fetching={fetching}/>
+            fetching={fetching}
+            initialValues={{
+              email,
+              verification: {
+                verificationId: verification.verificationId
+              }
+            }}/>
         );
       case 'setNewPassword':
         return (
@@ -42,11 +45,7 @@ const RecoveryPassword = (props) => {
             fetching={fetching}
             initialValues={{
               email,
-              verification: {
-                verificationId,
-                method,
-                code
-              }
+              resetId
             }}/>
         );
       default:

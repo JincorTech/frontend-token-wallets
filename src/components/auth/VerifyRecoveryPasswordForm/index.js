@@ -1,10 +1,11 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, FormSection } from 'redux-form';
 import { Button, Alert } from 'reactstrap';
 
 import { twoFactorCode } from '../../../utils/validators';
 
 import RenderInput from '../../forms/RenderInput';
+import RenderHiddenInput from '../../forms/RenderHiddenInput';
 
 const VerifyRecoveryPasswordForm = (props) => {
   const {
@@ -24,13 +25,25 @@ const VerifyRecoveryPasswordForm = (props) => {
       <h1>Recovery password</h1>
       <p className="text-muted">Enter pin code from email</p>
 
+      <FormSection name="verification">
+        <Field
+          component={RenderInput}
+          icon={<i className="fa fa-key fa-fw"/>}
+          name="code"
+          type="text"
+          placeholder="PIN"
+          validate={twoFactorCode}/>
+
+        <Field
+          component={RenderHiddenInput}
+          name="verificationId"
+          type="hidden"/>
+      </FormSection>
+
       <Field
-        component={RenderInput}
-        icon={<i className="fa fa-key fa-fw"/>}
-        name="code"
-        type="text"
-        placeholder="PIN"
-        validate={twoFactorCode}/>
+        component={RenderHiddenInput}
+        name="email"
+        type="hidden"/>
 
       {error ? <Alert color="danger">{error}</Alert> : null}
 
@@ -42,7 +55,11 @@ const VerifyRecoveryPasswordForm = (props) => {
 const FormComponent = reduxForm({
   form: 'verifyRecoveryPassword',
   initialValues: {
-    code: ''
+    email: '',
+    verification: {
+      verificationId: '',
+      code: ''
+    }
   }
 })(VerifyRecoveryPasswordForm);
 
