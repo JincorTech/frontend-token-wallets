@@ -30,8 +30,11 @@ class Tx extends Component {
       tx
     } = this.props;
 
+    console.log(tx);
+
     const {
       timestamp,
+      contractAddress,
       direction,
       status,
       amount,
@@ -68,11 +71,11 @@ class Tx extends Component {
         return dir(<span>{amount} ETH</span>);
       }
 
-      if (token.symbol) {
+      if (token && token.symbol) {
         return dir(<span>{amount} {token.symbol}</span>);
       }
 
-      return dir(<span>{amount} <a href={'https://etherscan.io'}>{shortAddress(token.contractAddress)}</a></span>);
+      return dir(<span>{amount} <a href={'https://etherscan.io'}>{shortAddress(contractAddress)}</a></span>);
     };
 
     const renderTs = () => format(new Date(timestamp * 1000), 'HH:mm | DD MMMM YYYY');
