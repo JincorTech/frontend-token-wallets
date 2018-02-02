@@ -12,7 +12,7 @@ import Sidebar from '../../../components/app/Sidebar';
 import Dashboard from '../Dashboard';
 import TransferTokens from '../TokenTransfer';
 import Transactions from '../Transactions';
-import Settings from '../../../components/app/Settings';
+import Settings from '../Settings';
 
 class AppWrapper extends Component {
   componentDidMount() {
