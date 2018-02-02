@@ -42,7 +42,7 @@ const SignUp = (props) => {
 
   return (
     <Col md="6">
-      <Card className="mx-4">
+      <Card className="mx-lg-4 mx-md-0">
         <CardBody className="p-4">
           {renderStep(step)}
         </CardBody>

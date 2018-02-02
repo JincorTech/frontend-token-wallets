@@ -7,7 +7,7 @@ import { twoFactorCode } from '../../../utils/validators';
 import RenderInput from '../../forms/RenderInput';
 import RenderHiddenInput from '../../forms/RenderHiddenInput';
 
-const VerifyTransferTokenForm = (props) => {
+const VerifyChangePasswordForm = (props) => {
   const {
     handleSubmit,
     invalid,
@@ -18,7 +18,7 @@ const VerifyTransferTokenForm = (props) => {
   const renderButton = () =>
     (fetching
       ? (<Button color="primary" className="px-4" disabled={true}><i className="fa fa-cog fa-spin fa-fw"/> Loading</Button>)
-      : (<Button color="primary" className="px-4" disabled={invalid}>Verify transaction</Button>));
+      : (<Button color="primary" className="px-4" disabled={invalid}>Change</Button>));
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -31,7 +31,7 @@ const VerifyTransferTokenForm = (props) => {
             icon={<i className="fa fa-key fa-fw"/>}
             name="code"
             type="text"
-            placeholder="Contract address"
+            placeholder="PIN code"
             validate={twoFactorCode}/>
         </FormGroup>
 
@@ -51,13 +51,13 @@ const VerifyTransferTokenForm = (props) => {
 };
 
 const FormComponent = reduxForm({
-  form: 'verifyTransferToken',
+  form: 'verifyChangePassword',
   initialValues: {
     verification: {
       verificationId: '',
       code: ''
     }
   }
-})(VerifyTransferTokenForm);
+})(VerifyChangePasswordForm);
 
 export default FormComponent;

@@ -43,7 +43,7 @@ const SignIn = (props) => {
   return (
     <Col md="8">
       <CardGroup>
-        <Card className="p-4">
+        <Card className="p-lg-4 p-md-2">
           <CardBody>
             {renderStep(step)}
           </CardBody>
@@ -61,6 +61,18 @@ const SignIn = (props) => {
           </CardBody>
         </Card>
       </CardGroup>
+      <Card className="text-white bg-primary py-lg-5 py-md-2 d-xs-block d-sm-block d-md-block d-lg-none">
+        <CardBody className="text-center">
+          <div>
+            <h2>Sign up</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+              sed do eiusmod tempor incididunt utlabore et dolore magna aliqua.
+            </p>
+            <Link to={namedRoutes.signUp} color="primary" className="btn btn-primary active mt-3">Sign Up Now!</Link>
+          </div>
+        </CardBody>
+      </Card>
     </Col>
   );
 };
