@@ -1,6 +1,6 @@
 import { all, takeLatest, call, fork, put } from 'redux-saga/effects';
-// import { SubmissionError } from 'redux-form';
-// import { get, post } from '../../utils/fetch';
+import { SubmissionError } from 'redux-form';
+import { post } from '../../utils/fetch';
 
 import { initTransferTokens, verifyTransferTokens, changeStep, resetStore } from '../../redux/modules/app/transferTokens';
 
@@ -11,7 +11,8 @@ const transformTransferTokensData = (req) => {
       type: 'eth_transfer',
       amount: req.amount,
       mnemonic: req.mnemonic,
-      to: req.to
+      to: req.to,
+      paymentPassword: req.paymentPassword
     };
   }
 
@@ -20,16 +21,18 @@ const transformTransferTokensData = (req) => {
     contractAddress: req.currency,
     amount: req.amount,
     mnemonic: req.mnemonic,
-    to: req.to
+    to: req.to,
+    paymentPassword: req.paymentPassword
   };
 };
 
 function* initTransferTokensIterator({ payload }) {
   try {
-    yield call(console.log, transformTransferTokensData(payload));
-    yield put(changeStep('registerToken'));
+    const data = yield call(post, '/dashboard/transaction/initiate', transformTransferTokensData(payload));
+    yield put(initTransferTokens.success(data));
+    yield put(changeStep('verifyTransferTokens'));
   } catch (e) {
-    yield call(console.log, e);
+    yield put(initTransferTokens.failure(new SubmissionError({ _error: e.message })));
   }
 }
 
@@ -43,11 +46,11 @@ function* fetchTokenInfoSaga() {
 
 function* verifyTransferTokensIterator({ payload }) {
   try {
-    yield call(console.log, payload);
-    // yield put(registerToken.success());
+    yield call(post, '/dashboard/transaction/verify', payload);
+    yield put(verifyTransferTokens.success());
     yield put(resetStore());
   } catch (e) {
-    // yield put(registerToken.failure(new SubmissionError({ _error: e.message })));
+    yield put(verifyTransferTokens.failure(new SubmissionError({ _error: e.message })));
   }
 }
 

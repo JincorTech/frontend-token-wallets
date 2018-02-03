@@ -14,6 +14,7 @@ const TxPopup = (props) => {
 
   const {
     transactionHash,
+    contractAddress,
     timestamp,
     blockNumber,
     from,
@@ -77,7 +78,7 @@ const TxPopup = (props) => {
       );
     }
 
-    if (token.symbol) {
+    if (token && token.symbol) {
       return (
         <li>
           <i className="fa fa-fw fa-money bg-primary"/>
@@ -89,19 +90,23 @@ const TxPopup = (props) => {
       );
     }
 
-    return (
-      <li>
-        <i className="fa fa-fw fa-money bg-primary"/>
-        <div className="desc">
-          <div className="title">Amount</div>
-          <small>{amount} <a href={'https://etherscan.io'}>{shortAddress(token.contractAddress)}</a></small>
-        </div>
-      </li>
-    );
+    if (contractAddress) {
+      return (
+        <li>
+          <i className="fa fa-fw fa-money bg-primary"/>
+          <div className="desc">
+            <div className="title">Amount</div>
+            <small>{amount} <a href={'https://etherscan.io'}>{shortAddress(contractAddress)}</a></small>
+          </div>
+        </li>
+      );
+    }
+
+    return null;
   };
 
   const renderContractAddress = () => {
-    if (token) {
+    if (contractAddress) {
       return (
         <li>
           <i className="fa fa-fw fa-file-text-o bg-primary"/>
@@ -109,9 +114,9 @@ const TxPopup = (props) => {
             <div className="title">Contract address</div>
             <small>
               <a
-                href={`https://etherscan.io/address/${token.contractAddress}`}
+                href={`https://etherscan.io/address/${contractAddress}`}
                 target="_blank">
-                {token.contractAddress}
+                {contractAddress}
               </a>
             </small>
           </div>

@@ -48,6 +48,13 @@ const SignUpForm = (props) => {
         placeholder="Password"
         validate={passwordValidate}/>
 
+      <Field
+        component={RenderPasswordInput}
+        name="paymentPassword"
+        type="password"
+        placeholder="Payment password"
+        validate={passwordValidate}/>
+
       {error ? <Alert color="danger">{error}</Alert> : null}
 
       {renderButton()}
@@ -60,7 +67,8 @@ const FormComponent = reduxForm({
   initialValues: {
     name: '',
     email: '',
-    password: ''
+    password: '',
+    paymentPassword: ''
   }
 })(SignUpForm);
 
