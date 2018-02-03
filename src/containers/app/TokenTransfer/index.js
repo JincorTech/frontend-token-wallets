@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Row, Col, Card, CardBody } from 'reactstrap';
 
 import { fetchBalances } from '../../../redux/modules/app/dashboard';
-import { initTransferTokens, verifyTransferTokensm, changeStep } from '../../../redux/modules/app/transferTokens';
+import { initTransferTokens, verifyTransferTokens } from '../../../redux/modules/app/transferTokens';
 
 import TokenTransferForm from '../../../components/app/TransferTokensForm';
 import VerifyTransferTokenForm from '../../../components/app/VerifyTransferTokensForm';
@@ -17,9 +17,10 @@ class TokenTransfer extends Component {
 
   render() {
     const {
+      fetching,
       erc20TokensBalance,
       step,
-      changeStep
+      verification
     } = this.props;
 
     const currencies = erc20TokensBalance.reduce(
@@ -34,15 +35,19 @@ class TokenTransfer extends Component {
           return (
             <TokenTransferForm
               onSubmit={initTransferTokens}
-              fetching={false}
+              fetching={fetching}
               currencies={currencies}/>
           );
         case 'verifyTransferTokens':
           return (
             <VerifyTransferTokenForm
-              onSubmit={verifyTransferTokensm}
-              fetching={false}
-              initialValues={{}}/>
+              onSubmit={verifyTransferTokens}
+              fetching={fetching}
+              initialValues={{
+                verification: {
+                  verificationId: verification.verificationId
+                }
+              }}/>
           );
         default:
           return 'Something went wrong';
@@ -51,8 +56,6 @@ class TokenTransfer extends Component {
 
     return (
       <div className="animated fadeIn mt-4">
-        <button onClick={() => changeStep('transferTokens')}>1</button>
-        <button onClick={() => changeStep('verifyTransferTokens')}>2</button>
         <Row>
           <Col xs="12" lg="5">
             <Card>
@@ -73,7 +76,6 @@ export default connect(
     ...state.app.transferTokens
   }),
   {
-    fetchBalances,
-    changeStep
+    fetchBalances
   }
 )(TokenTransfer);

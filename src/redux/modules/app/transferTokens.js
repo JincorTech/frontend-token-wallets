@@ -13,7 +13,11 @@ export const resetStore = createAction(RESET_STORE);
 
 const initialState = from({
   fetching: false,
-  step: 'transferTokens'
+  step: 'transferTokens',
+  verification: {
+    verificationId: '',
+    method: 'email'
+  }
 });
 
 export default createReducer({
@@ -23,9 +27,10 @@ export default createReducer({
     })
   ),
 
-  [initTransferTokens.SUCCESS]: (state) => (
+  [initTransferTokens.SUCCESS]: (state, { payload }) => (
     state.merge({
-      fetching: false
+      fetching: false,
+      verification: payload.verification
     })
   ),
 

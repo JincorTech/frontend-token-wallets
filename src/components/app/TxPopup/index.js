@@ -101,6 +101,8 @@ const TxPopup = (props) => {
         </li>
       );
     }
+
+    return null;
   };
 
   const renderContractAddress = () => {

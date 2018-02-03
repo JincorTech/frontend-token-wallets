@@ -10,10 +10,11 @@ import {
   Alert
 } from 'reactstrap';
 
-import { required, number } from '../../../utils/validators';
+import { required, number, passwordValidate } from '../../../utils/validators';
 
 import RenderInput from '../../forms/RenderInput';
 import RenderSelect from '../../forms/RenderSelect';
+import RenderPasswordInput from '../../forms/RenderPasswordInput';
 
 const TransferTokensForm = (props) => {
   const {
@@ -76,6 +77,22 @@ const TransferTokensForm = (props) => {
         </Col>
       </Row>
 
+      <Row>
+        <Col xs={12}>
+          <FormGroup>
+            <Label>Payment password</Label>
+
+            <Field
+              component={RenderPasswordInput}
+              icon={<i className="fa fa-user fa-fw"/>}
+              name="paymentPassword"
+              type="password"
+              placeholder="Payment password"
+              validate={passwordValidate}/>
+          </FormGroup>
+        </Col>
+      </Row>
+
       {error ? <Alert color="danger">{error}</Alert> : null}
 
       <FormGroup>
@@ -90,7 +107,8 @@ const FormComponent = reduxForm({
   initialValues: {
     to: '',
     amount: '',
-    currency: ''
+    currency: '',
+    paymentPassword: ''
   }
 })(TransferTokensForm);
 
