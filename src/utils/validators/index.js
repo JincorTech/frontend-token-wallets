@@ -1,5 +1,5 @@
 const EMAIL_REGEXP = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-const PASSWORD_REGEXP = /^[a-zA-Z0\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/;
+const PASSWORD_REGEXP = /^[a-zA-Z0\d!"#$%&'()*+,-.:;<=>?@[\]^_`{|}~]{8,20}$/;
 const NUMBER_REGEXP = /^\d{0,}(\.\d{0,}){0,1}$/;
 
 export const requiredValidator = (msg) =>
@@ -41,6 +41,7 @@ export const emailValidate = [
 export const passwordValidate = [
   requiredValidator('Password required'),
   minLength(8, 'Minimum 8 characters'),
+  maxLength(20, 'Maximum 8 characters'),
   password('Invalid password')
 ];
 

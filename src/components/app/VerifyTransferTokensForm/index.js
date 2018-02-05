@@ -31,7 +31,8 @@ const VerifyTransferTokenForm = (props) => {
             icon={<i className="fa fa-key fa-fw"/>}
             name="code"
             type="text"
-            placeholder="Contract address"
+            placeholder="PIN Code"
+            autoComplete="off"
             validate={twoFactorCode}/>
         </FormGroup>
 

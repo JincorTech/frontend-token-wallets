@@ -33,7 +33,8 @@ const VerifySignInForm = (props) => {
           icon={<i className="fa fa-key fa-fw"/>}
           name="code"
           type="text"
-          placeholder="PIN"
+          placeholder="PIN code"
+          autoComplete="off"
           validate={twoFactorCode}/>
 
         <Field
