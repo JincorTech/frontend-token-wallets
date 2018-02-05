@@ -25,7 +25,7 @@ const RenderPasswordInput = (props) => {
           <i className="fa fa-lock fa-fw"></i>
         </span>
       </div>
-      <Input valid={isValid()} type="password" meta={meta} {...input} {...restProps}/>
+      <Input valid={isValid()} autocomplete="off" type="password" meta={meta} {...input} {...restProps}/>
       <FormFeedback>{error}</FormFeedback>
     </InputGroup>
   );

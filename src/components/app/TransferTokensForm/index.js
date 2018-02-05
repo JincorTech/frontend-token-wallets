@@ -43,6 +43,7 @@ const TransferTokensForm = (props) => {
               name="to"
               type="text"
               placeholder="Recipient address"
+              autocomplete="off"
               validate={required}/>
           </FormGroup>
         </Col>
@@ -59,6 +60,7 @@ const TransferTokensForm = (props) => {
               name="amount"
               type="text"
               placeholder="Amount"
+              autocomplete="off"
               validate={number}/>
           </FormGroup>
         </Col>
@@ -88,6 +90,7 @@ const TransferTokensForm = (props) => {
               name="paymentPassword"
               type="password"
               placeholder="Payment password"
+              autocomplete="off"
               validate={passwordValidate}/>
           </FormGroup>
         </Col>

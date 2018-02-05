@@ -31,7 +31,8 @@ const VerifySignUpForm = (props) => {
           icon={<i className="fa fa-key fa-fw"/>}
           name="code"
           type="text"
-          placeholder="PIN"
+          placeholder="PIN code"
+          autocomplete="off"
           validate={twoFactorCode}/>
 
         <Field

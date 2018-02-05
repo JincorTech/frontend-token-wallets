@@ -32,6 +32,7 @@ const VerifyChangePasswordForm = (props) => {
             name="code"
             type="text"
             placeholder="PIN code"
+            autocomplete="off"
             validate={twoFactorCode}/>
         </FormGroup>
 
