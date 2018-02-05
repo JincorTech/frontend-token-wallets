@@ -41,7 +41,7 @@ export const emailValidate = [
 export const passwordValidate = [
   requiredValidator('Password required'),
   minLength(8, 'Minimum 8 characters'),
-  maxLength(20, 'Maximum 8 characters'),
+  maxLength(20, 'Maximum 20 characters'),
   password('Invalid password')
 ];
 

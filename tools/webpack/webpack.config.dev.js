@@ -34,6 +34,7 @@ const plugins = [
   new StylelintWebpackPlugin(),
   new HtmlWebpackPlugin({
     template: 'src/index.html',
+    favicon: 'src/assets/favicon.png',
     minify: {
       removeComments: true,
       collapseWhitespace: true
