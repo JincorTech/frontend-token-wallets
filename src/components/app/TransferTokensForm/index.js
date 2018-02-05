@@ -43,7 +43,7 @@ const TransferTokensForm = (props) => {
               name="to"
               type="text"
               placeholder="Recipient address"
-              autocomplete="off"
+              autoComplete="off"
               validate={required}/>
           </FormGroup>
         </Col>
@@ -60,7 +60,7 @@ const TransferTokensForm = (props) => {
               name="amount"
               type="text"
               placeholder="Amount"
-              autocomplete="off"
+              autoComplete="off"
               validate={number}/>
           </FormGroup>
         </Col>
@@ -90,7 +90,7 @@ const TransferTokensForm = (props) => {
               name="paymentPassword"
               type="password"
               placeholder="Payment password"
-              autocomplete="off"
+              autoComplete="off"
               validate={passwordValidate}/>
           </FormGroup>
         </Col>
@@ -105,8 +105,19 @@ const TransferTokensForm = (props) => {
   );
 };
 
+const validate = (values, props) => {
+  const errors = {};
+
+  if (values.to === props.selfAddress) {
+    errors.to = 'You can not send tokens to yourself';
+  }
+
+  return errors;
+};
+
 const FormComponent = reduxForm({
   form: 'transferTokens',
+  validate,
   initialValues: {
     to: '',
     amount: '',

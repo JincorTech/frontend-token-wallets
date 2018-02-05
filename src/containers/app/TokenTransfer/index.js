@@ -19,6 +19,7 @@ class TokenTransfer extends Component {
     const {
       fetching,
       erc20TokensBalance,
+      selfAddress,
       step,
       verification
     } = this.props;
@@ -36,7 +37,8 @@ class TokenTransfer extends Component {
             <TokenTransferForm
               onSubmit={initTransferTokens}
               fetching={fetching}
-              currencies={currencies}/>
+              currencies={currencies}
+              selfAddress={selfAddress}/>
           );
         case 'verifyTransferTokens':
           return (
@@ -73,6 +75,7 @@ class TokenTransfer extends Component {
 export default connect(
   (state) => ({
     erc20TokensBalance: state.app.dashboard.erc20TokensBalance,
+    selfAddress: state.app.app.user.ethAddress,
     ...state.app.transferTokens
   }),
   {

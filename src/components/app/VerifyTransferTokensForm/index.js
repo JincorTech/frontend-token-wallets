@@ -32,7 +32,7 @@ const VerifyTransferTokenForm = (props) => {
             name="code"
             type="text"
             placeholder="PIN Code"
-            autocomplete="off"
+            autoComplete="off"
             validate={twoFactorCode}/>
         </FormGroup>
 

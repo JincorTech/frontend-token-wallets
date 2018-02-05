@@ -32,7 +32,7 @@ const VerifyRecoveryPasswordForm = (props) => {
           name="code"
           type="text"
           placeholder="PIN code"
-          autocomplete="off"
+          autoComplete="off"
           validate={twoFactorCode}/>
 
         <Field
