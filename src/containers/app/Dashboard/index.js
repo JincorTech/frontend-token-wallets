@@ -25,9 +25,7 @@ class Dashboard extends Component {
       ethBalance,
       lbrsBalance,
       erc20TokensBalance,
-      ethAddress,
-      email,
-      name
+      ethAddress
     } = this.props;
 
     const renderTableRow = (token) => (
@@ -41,14 +39,6 @@ class Dashboard extends Component {
       <div className="animated fadeIn mt-4">
         <Row>
           <Col xs="12" lg="4">
-            <Card className="text-black bg-white">
-              <CardBody>
-                <h2 className="mb-2">Hello, {name}!</h2>
-                <h5 className="mb-2">We glad to see you again.</h5>
-                <p>Your email: {email}</p>
-              </CardBody>
-            </Card>
-
             <Card className="text-white bg-info">
               <CardBody>
                 <h2 className="mb-2">{ethBalance}</h2>

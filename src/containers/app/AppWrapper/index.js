@@ -23,12 +23,17 @@ class AppWrapper extends Component {
 
   render() {
     const {
-      logout
+      logout,
+      name,
+      email
     } = this.props;
 
     return (
       <div className="app">
-        <Header logout={logout}/>
+        <Header
+          logout={logout}
+          name={name}
+          email={email}/>
         <div className="app-body">
           <Sidebar {...this.props}/>
           <main className="main">
@@ -49,7 +54,9 @@ class AppWrapper extends Component {
 }
 
 const ConnectedComponent = connect(
-  null,
+  (state) => ({
+    ...state.app.app.user
+  }),
   {
     logout,
     fetchUser

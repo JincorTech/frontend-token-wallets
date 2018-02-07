@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Nav, NavLink, NavbarBrand, NavbarToggler } from 'reactstrap';
+import { Nav, NavLink, NavbarBrand, NavbarToggler, NavItem } from 'reactstrap';
 
 class Header extends Component {
   sidebarToggle(e) {
@@ -24,7 +24,9 @@ class Header extends Component {
 
   render() {
     const {
-      logout
+      logout,
+      email,
+      name
     } = this.props;
 
     return (
@@ -33,10 +35,10 @@ class Header extends Component {
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
         <NavbarBrand href="#"></NavbarBrand>
-        <NavbarToggler className="d-md-down-none" onClick={this.sidebarToggle}>
-          <span className="navbar-toggler-icon"></span>
-        </NavbarToggler>
         <Nav className="ml-auto pr-4" navbar>
+          <NavItem className="px-3">
+            {name} | {email}
+          </NavItem>
           <NavLink href="#" onClick={() => logout()}><i className="icon-lock"></i> Logout</NavLink>
         </Nav>
       </header>
