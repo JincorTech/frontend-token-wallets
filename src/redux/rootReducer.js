@@ -11,6 +11,7 @@ import changePassword from './modules/app/changePassword';
 import signInReducer from './modules/auth/signIn';
 import signUpReducer from './modules/auth/signUp';
 import recoveryPasswordReducer from './modules/auth/recoveryPassword';
+import manageEmailNotifications from './modules/app/manageEmailNotifications';
 
 export default combineReducers({
   routing,
@@ -23,7 +24,8 @@ export default combineReducers({
     transactions,
     txPopup,
     transferTokens,
-    changePassword
+    changePassword,
+    manageEmailNotifications
   }),
 
   auth: combineReducers({

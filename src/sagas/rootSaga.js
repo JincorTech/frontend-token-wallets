@@ -10,6 +10,7 @@ import changePassword from './app/changePasswordSaga';
 import signUpSaga from './auth/signUpSaga';
 import signInSaga from './auth/signInSaga';
 import recoveryPasswordSaga from './auth/recoveryPasswordSaga';
+import manageEmailNotificationsSaga from './app/manageEmailNotificationsSaga';
 
 export default function* () {
   yield all([
@@ -22,6 +23,7 @@ export default function* () {
     fork(changePassword),
     fork(signUpSaga),
     fork(signInSaga),
-    fork(recoveryPasswordSaga)
+    fork(recoveryPasswordSaga),
+    fork(manageEmailNotificationsSaga)
   ]);
 }

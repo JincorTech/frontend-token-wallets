@@ -24,7 +24,20 @@ const initialState = from({
     ethAddress: '',
     email: '',
     name: '',
-    defaultVerificationMethod: 'email'
+    defaultVerificationMethod: 'email',
+    tokens: [],
+    preferences: {
+      notifications: {
+        user_signin: false,
+        user_change_password: false,
+        user_reset_password: false
+      },
+      verifications: {
+        user_signin: false,
+        user_change_password: false,
+        transaction_send: false
+      }
+    }
   }
 });
 
