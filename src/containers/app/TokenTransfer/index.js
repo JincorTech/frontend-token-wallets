@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Card, CardBody } from 'reactstrap';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 
-import { fetchBalances } from '../../../redux/modules/app/dashboard';
 import { initTransferTokens, verifyTransferTokens } from '../../../redux/modules/app/transferTokens';
 
 import TokenTransferForm from '../../../components/app/TransferTokensForm';
 import VerifyTransferTokenForm from '../../../components/app/VerifyTransferTokensForm';
 
 class TokenTransfer extends Component {
-  componentDidMount() {
-    const { fetchBalances } = this.props;
-
-    fetchBalances();
-  }
-
   render() {
     const {
       fetching,
@@ -57,17 +50,14 @@ class TokenTransfer extends Component {
     };
 
     return (
-      <div className="animated fadeIn mt-4">
-        <Row>
-          <Col xs="12" lg="5">
-            <Card>
-              <CardBody>
-                {renderStep(step)}
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+      <Card>
+        <CardHeader>
+          <h4 className="my-0">Make transaction</h4>
+        </CardHeader>
+        <CardBody>
+          {renderStep(step)}
+        </CardBody>
+      </Card>
     );
   }
 }
@@ -78,7 +68,5 @@ export default connect(
     selfAddress: state.app.app.user.ethAddress,
     ...state.app.transferTokens
   }),
-  {
-    fetchBalances
-  }
+  {}
 )(TokenTransfer);

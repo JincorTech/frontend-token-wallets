@@ -30,8 +30,6 @@ class Tx extends Component {
       tx
     } = this.props;
 
-    console.log(tx);
-
     const {
       timestamp,
       contractAddress,

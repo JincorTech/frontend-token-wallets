@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Card, CardBody } from 'reactstrap';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 
 import { openTxPopup, closeTxPopup, toggleTxPopup } from '../../../redux/modules/app/txPopup';
 import { fetchTxs } from '../../../redux/modules/app/transactions';
@@ -39,16 +39,15 @@ class Transactions extends Component {
     };
 
     return (
-      <div className="animated fadeIn mt-4">
-        <Row>
-          <Col xs="12" lg="5">
-            <Card>
-              <CardBody>
-                {renderTxs()}
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
+      <div>
+        <Card>
+          <CardHeader>
+            <h4 className="my-0">Transactions</h4>
+          </CardHeader>
+          <CardBody>
+            {renderTxs()}
+          </CardBody>
+        </Card>
 
         <TxPopup
           open={open}

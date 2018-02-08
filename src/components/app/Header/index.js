@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Nav, NavLink, NavbarBrand, NavbarToggler, NavItem } from 'reactstrap';
+
+import { namedRoutes } from '../../../routes';
 
 class Header extends Component {
   sidebarToggle(e) {
@@ -34,12 +37,25 @@ class Header extends Component {
         <NavbarToggler className="d-lg-none" onClick={this.mobileSidebarToggle}>
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
-        <NavbarBrand href="#"></NavbarBrand>
+        <NavbarBrand tag={Link} to={namedRoutes.dashboard}/>
+        <Nav className="d-md-down-none" navbar>
+          <NavItem className="px-3">
+            <i className="fa fa-fw fa-user-o"/> {name}
+          </NavItem>
+          <NavItem className="px-3">
+            <i className="fa fa-fw fa-envelope-o"/> {email}
+          </NavItem>
+        </Nav>
         <Nav className="ml-auto pr-4" navbar>
           <NavItem className="px-3">
-            {name} | {email}
+            <NavLink tag={Link} to={namedRoutes.dashboard}><i className="fa fa-fw fa-tachometer"/> Dashboard</NavLink>
           </NavItem>
-          <NavLink href="#" onClick={() => logout()}><i className="icon-lock"></i> Logout</NavLink>
+          <NavItem className="d-md-down-none px-3">
+            <NavLink tag={Link} to={namedRoutes.settings}><i className="fa fa-fw fa-cog"/> Settings</NavLink>
+          </NavItem>
+          <NavItem className="d-md-down-none px-3">
+            <NavLink href="#" onClick={() => logout()}><i className="fa fa-fw fa-sign-out"/> Logout</NavLink>
+          </NavItem>
         </Nav>
       </header>
     );

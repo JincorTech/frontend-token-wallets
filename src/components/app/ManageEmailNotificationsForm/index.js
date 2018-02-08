@@ -17,8 +17,6 @@ const ManageEmailNotificationsForm = (props) => {
     fetching
   } = props;
 
-  console.log(props);
-
   const renderButton = () =>
     (fetching
       ? (<Button color="primary" className="px-4" disabled={true}><i className="fa fa-cog fa-spin fa-fw"/> Loading</Button>)
