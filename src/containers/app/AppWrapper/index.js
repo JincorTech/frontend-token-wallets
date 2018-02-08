@@ -7,6 +7,7 @@ import { namedRoutes } from '../../../routes';
 import { logout, fetchUser } from '../../../redux/modules/app/app';
 
 import Header from '../../../components/app/Header';
+import Sidebar from '../../../components/app/Sidebar';
 
 import Dashboard from '../Dashboard';
 import Settings from '../Settings';
@@ -19,19 +20,11 @@ class AppWrapper extends Component {
   }
 
   render() {
-    const {
-      logout,
-      name,
-      email
-    } = this.props;
-
     return (
       <div className="app">
-        <Header
-          logout={logout}
-          name={name}
-          email={email}/>
+        <Header {...this.props}/>
         <div className="app-body">
+          <Sidebar {...this.props}/>
           <main className="main">
             <Container fluid>
               <Switch>

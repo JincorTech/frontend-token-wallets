@@ -28,7 +28,7 @@ class Header extends Component {
   render() {
     const {
       logout,
-      email,
+      ethAddress,
       name
     } = this.props;
 
@@ -43,10 +43,10 @@ class Header extends Component {
             <i className="fa fa-fw fa-user-o"/> {name}
           </NavItem>
           <NavItem className="px-3">
-            <i className="fa fa-fw fa-envelope-o"/> {email}
+            <i className="fa fa-fw fa-credit-card"/> {ethAddress}
           </NavItem>
         </Nav>
-        <Nav className="ml-auto pr-4" navbar>
+        <Nav className="d-md-down-none ml-auto pr-4" navbar>
           <NavItem className="px-3">
             <NavLink tag={Link} to={namedRoutes.dashboard}><i className="fa fa-fw fa-tachometer"/> Dashboard</NavLink>
           </NavItem>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import { Badge, Nav, NavItem, NavLink as RsNavLink } from 'reactstrap';
+import { Badge, Nav, NavItem, NavLink as RsNavLink, Button } from 'reactstrap';
 import classNames from 'classnames';
 
 import nav from './_nav';
@@ -125,10 +125,21 @@ class Sidebar extends Component {
 
     // sidebar-nav root
     return (
-      <div className="sidebar">
+      <div className="sidebar d-lg-none d-xl-none">
+        <div className="sidebar-header">
+          <h5>{this.props.name}</h5>
+          <small>{this.props.email}</small>
+          <div className="mt-4">
+            <h6 style={{ wordWrap: 'break-word' }}>{this.props.ethAddress}</h6>
+            <Button color="link" size="sm">Copy</Button>
+          </div>
+        </div>
         <nav className="sidebar-nav">
           <Nav>
             {navList(nav.items)}
+            <a className="nav-link" onClick={() => this.props.logout()}>
+              <i className="fa fa-fw fa-sign-out"></i> Logout
+            </a>
           </Nav>
         </nav>
         <SidebarMinimizer/>

@@ -63,10 +63,6 @@ class Dashboard extends Component {
           </Col>
 
           <Col xs="12" lg="4">
-            <Transactions/>
-          </Col>
-
-          <Col xs="12" lg="4">
             <Card className="bg-white">
               <CardHeader>
                 <h4 className="my-0">Balances</h4>
@@ -81,6 +77,10 @@ class Dashboard extends Component {
             </Card>
 
             <RegisterToken/>
+          </Col>
+
+          <Col xs="12" lg="4">
+            <Transactions/>
           </Col>
         </Row>
       </div>
