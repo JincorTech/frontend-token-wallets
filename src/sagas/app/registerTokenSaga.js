@@ -37,7 +37,15 @@ function* registerTokenIterator({ payload }) {
     yield put(fetchBalances());
     yield put(resetStore());
   } catch (e) {
-    yield put(registerToken.failure(new SubmissionError({ _error: e.message })));
+    if (e.error.isJoi) {
+      yield put(registerToken.failure(new SubmissionError({
+        _error: e.error.details[0].message
+      })));
+    } else {
+      yield put(registerToken.failure(new SubmissionError({
+        _error: e.message
+      })));
+    }
   }
 }
 

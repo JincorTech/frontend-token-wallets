@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
-import { Nav, NavLink, NavbarBrand, NavbarToggler } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { Nav, NavLink, NavbarBrand, NavbarToggler, NavItem } from 'reactstrap';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
+import { namedRoutes } from '../../../routes';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      addressCopied: false
+    };
+  }
+
   sidebarToggle(e) {
     e.preventDefault();
     document.body.classList.toggle('sidebar-hidden');
@@ -24,20 +36,49 @@ class Header extends Component {
 
   render() {
     const {
-      logout
+      logout,
+      ethAddress,
+      name,
+      openQrAddressPopup
     } = this.props;
+
+    const {
+      addressCopied
+    } = this.state;
 
     return (
       <header className="app-header navbar">
         <NavbarToggler className="d-lg-none" onClick={this.mobileSidebarToggle}>
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
-        <NavbarBrand href="#"></NavbarBrand>
-        <NavbarToggler className="d-md-down-none" onClick={this.sidebarToggle}>
-          <span className="navbar-toggler-icon"></span>
-        </NavbarToggler>
-        <Nav className="ml-auto pr-4" navbar>
-          <NavLink href="#" onClick={() => logout()}><i className="icon-lock"></i> Logout</NavLink>
+        <NavbarBrand tag={Link} to={namedRoutes.dashboard}/>
+        <Nav className="d-md-down-none" navbar>
+          <NavItem className="px-3">
+            <i className="fa fa-fw fa-user-o"/> {name}
+          </NavItem>
+          <NavItem className="px-3">
+            <i className="fa fa-fw fa-credit-card"/> {ethAddress}
+          </NavItem>
+          <NavItem className="px-3">
+            <CopyToClipboard text={ethAddress}
+              onCopy={() => this.setState({ addressCopied: true })}>
+              <NavLink href="#"><i className="fa fa-fw fa-clipboard"/> {addressCopied ? 'Copied!' : 'Copy address'}</NavLink>
+            </CopyToClipboard>
+          </NavItem>
+          <NavItem className="px-3">
+            <NavLink href="#" onClick={() => openQrAddressPopup(ethAddress)}><i className="fa fa-fw fa-qrcode"/></NavLink>
+          </NavItem>
+        </Nav>
+        <Nav className="d-md-down-none ml-auto pr-4" navbar>
+          <NavItem className="px-3">
+            <NavLink tag={Link} to={namedRoutes.dashboard}><i className="fa fa-fw fa-tachometer"/> Dashboard</NavLink>
+          </NavItem>
+          <NavItem className="d-md-down-none px-3">
+            <NavLink tag={Link} to={namedRoutes.settings}><i className="fa fa-fw fa-cog"/> Settings</NavLink>
+          </NavItem>
+          <NavItem className="d-md-down-none px-3">
+            <NavLink href="#" onClick={() => logout()}><i className="fa fa-fw fa-sign-out"/> Logout</NavLink>
+          </NavItem>
         </Nav>
       </header>
     );

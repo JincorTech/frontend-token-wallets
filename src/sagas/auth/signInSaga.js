@@ -14,7 +14,15 @@ function* signInIterator({ payload }) {
     yield put(signIn.success(data));
     yield put(changeStep('verifySignIn'));
   } catch (e) {
-    yield put(signIn.failure(new SubmissionError({ _error: e.message })));
+    if (e.error.isJoi) {
+      yield put(signIn.failure(new SubmissionError({
+        _error: e.error.details[0].message
+      })));
+    } else {
+      yield put(signIn.failure(new SubmissionError({
+        _error: e.message
+      })));
+    }
   }
 }
 
@@ -34,7 +42,15 @@ function* verifySignInIterator({ payload }) {
     yield put(resetStore());
     yield put(push(namedRoutes.dashboard));
   } catch (e) {
-    yield put(verifySignIn.failure(new SubmissionError({ _error: e.message })));
+    if (e.error.isJoi) {
+      yield put(verifySignIn.failure(new SubmissionError({
+        _error: e.error.details[0].message
+      })));
+    } else {
+      yield put(verifySignIn.failure(new SubmissionError({
+        _error: e.message
+      })));
+    }
   }
 }
 

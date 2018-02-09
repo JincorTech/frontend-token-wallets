@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import { Badge, Nav, NavItem, NavLink as RsNavLink } from 'reactstrap';
+import { Badge, Nav, NavItem, NavLink as RsNavLink, Button } from 'reactstrap';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import classNames from 'classnames';
 
 import nav from './_nav';
@@ -9,6 +10,10 @@ import SidebarMinimizer from './../SidebarMinimizer';
 class Sidebar extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      addressCopiend: false
+    };
 
     this.handleClick = this.handleClick.bind(this);
     this.activeRoute = this.activeRoute.bind(this);
@@ -125,10 +130,34 @@ class Sidebar extends Component {
 
     // sidebar-nav root
     return (
-      <div className="sidebar">
+      <div className="sidebar d-lg-none d-xl-none">
+        <div className="sidebar-header">
+          <h5>{this.props.name}</h5>
+          <small>{this.props.email}</small>
+          <div className="mt-4">
+            <h6 style={{ wordWrap: 'break-word' }}>{this.props.ethAddress}</h6>
+            <CopyToClipboard text={this.props.ethAddress}
+              onCopy={() => this.setState({ addressCopied: true })}>
+              <Button
+                color="link"
+                size="sm">
+                <i className="fa fa-fw fa-clipboard"/> {this.state.addressCopied ? 'Copied!' : 'Copy address'}
+              </Button>
+            </CopyToClipboard>
+            <Button
+              onClick={() => this.props.openQrAddressPopup(this.props.ethAddress)}
+              color="link"
+              size="sm">
+              <i className="fa fa-fw fa-qrcode"/> Show as QR code
+            </Button>
+          </div>
+        </div>
         <nav className="sidebar-nav">
           <Nav>
             {navList(nav.items)}
+            <a className="nav-link" onClick={() => this.props.logout()}>
+              <i className="fa fa-fw fa-sign-out"></i> Logout
+            </a>
           </Nav>
         </nav>
         <SidebarMinimizer/>

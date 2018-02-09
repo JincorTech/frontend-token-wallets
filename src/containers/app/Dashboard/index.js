@@ -6,6 +6,8 @@ import { Row, Col, Card, CardHeader, CardBody, Table } from 'reactstrap';
 import { fetchBalances } from '../../../redux/modules/app/dashboard';
 
 import RegisterToken from '../RegisterToken';
+import Transactions from '../Transactions';
+import TokenTransfer from '../TokenTransfer';
 
 let fetchRepeater;
 
@@ -24,10 +26,7 @@ class Dashboard extends Component {
     const {
       ethBalance,
       lbrsBalance,
-      erc20TokensBalance,
-      ethAddress,
-      email,
-      name
+      erc20TokensBalance
     } = this.props;
 
     const renderTableRow = (token) => (
@@ -41,21 +40,10 @@ class Dashboard extends Component {
       <div className="animated fadeIn mt-4">
         <Row>
           <Col xs="12" lg="4">
-            <Card className="text-black bg-white">
-              <CardBody>
-                <h2 className="mb-2">Hello, {name}!</h2>
-                <h5 className="mb-2">We glad to see you again.</h5>
-                <p>Your email: {email}</p>
-              </CardBody>
-            </Card>
-
             <Card className="text-white bg-info">
               <CardBody>
                 <h2 className="mb-2">{ethBalance}</h2>
                 <h5 className="mb-2">ETH wallet</h5>
-                <p>{ethAddress}</p>
-                <a className="btn btn-secondary disabled"><i className="icon-magic-wand"></i>&nbsp;&nbsp;Transfer</a>{' '}
-                <button className="btn btn-secondary text-white" disabled><i className="icon-wallet"></i>&nbsp;&nbsp;Copy address</button>
               </CardBody>
             </Card>
 
@@ -63,11 +51,10 @@ class Dashboard extends Component {
               <CardBody>
                 <h2 className="mb-2">{lbrsBalance}</h2>
                 <h5 className="mb-2">LBRS wallet</h5>
-                <p>{ethAddress}</p>
-                <a className="btn btn-secondary disabled"><i className="icon-magic-wand"></i>&nbsp;&nbsp;Transfer</a>{' '}
-                <button className="btn btn-secondary text-white" disabled><i className="icon-wallet"></i>&nbsp;&nbsp;Copy address</button>
               </CardBody>
             </Card>
+
+            <TokenTransfer/>
           </Col>
 
           <Col xs="12" lg="4">
@@ -83,10 +70,12 @@ class Dashboard extends Component {
                 </Table>
               </CardBody>
             </Card>
+
+            <RegisterToken/>
           </Col>
 
           <Col xs="12" lg="4">
-            <RegisterToken/>
+            <Transactions/>
           </Col>
         </Row>
       </div>

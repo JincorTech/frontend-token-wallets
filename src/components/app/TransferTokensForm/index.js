@@ -50,7 +50,7 @@ const TransferTokensForm = (props) => {
       </Row>
 
       <Row>
-        <Col xs={8}>
+        <Col xs={6}>
           <FormGroup>
             <Label>Amount</Label>
 
@@ -65,7 +65,7 @@ const TransferTokensForm = (props) => {
           </FormGroup>
         </Col>
 
-        <Col xs={4}>
+        <Col xs={6}>
           <FormGroup>
             <Label>Currency</Label>
 
