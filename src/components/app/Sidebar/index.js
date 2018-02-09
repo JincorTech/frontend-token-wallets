@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Badge, Nav, NavItem, NavLink as RsNavLink, Button } from 'reactstrap';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import classNames from 'classnames';
 
 import nav from './_nav';
@@ -9,6 +10,10 @@ import SidebarMinimizer from './../SidebarMinimizer';
 class Sidebar extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      addressCopiend: false
+    };
 
     this.handleClick = this.handleClick.bind(this);
     this.activeRoute = this.activeRoute.bind(this);
@@ -131,7 +136,14 @@ class Sidebar extends Component {
           <small>{this.props.email}</small>
           <div className="mt-4">
             <h6 style={{ wordWrap: 'break-word' }}>{this.props.ethAddress}</h6>
-            <Button color="link" size="sm">Copy</Button>
+            <CopyToClipboard text={this.props.ethAddress}
+              onCopy={() => this.setState({ addressCopied: true })}>
+              <Button
+                color="link"
+                size="sm">
+                <i className="fa fa-fw fa-clipboard"/> {this.state.addressCopied ? 'Copied!' : 'Copy address'}
+              </Button>
+            </CopyToClipboard>
           </div>
         </div>
         <nav className="sidebar-nav">

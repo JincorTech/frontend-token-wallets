@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavLink, NavbarBrand, NavbarToggler, NavItem } from 'reactstrap';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { namedRoutes } from '../../../routes';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      addressCopied: false
+    };
+  }
+
   sidebarToggle(e) {
     e.preventDefault();
     document.body.classList.toggle('sidebar-hidden');
@@ -32,6 +41,10 @@ class Header extends Component {
       name
     } = this.props;
 
+    const {
+      addressCopied
+    } = this.state;
+
     return (
       <header className="app-header navbar">
         <NavbarToggler className="d-lg-none" onClick={this.mobileSidebarToggle}>
@@ -44,6 +57,12 @@ class Header extends Component {
           </NavItem>
           <NavItem className="px-3">
             <i className="fa fa-fw fa-credit-card"/> {ethAddress}
+          </NavItem>
+          <NavItem className="px-3">
+            <CopyToClipboard text={ethAddress}
+              onCopy={() => this.setState({ addressCopied: true })}>
+              <NavLink href="#"><i className="fa fa-fw fa-clipboard"/> {addressCopied ? 'Copied!' : 'Copy address'}</NavLink>
+            </CopyToClipboard>
           </NavItem>
         </Nav>
         <Nav className="d-md-down-none ml-auto pr-4" navbar>

@@ -26,8 +26,7 @@ class Dashboard extends Component {
     const {
       ethBalance,
       lbrsBalance,
-      erc20TokensBalance,
-      ethAddress
+      erc20TokensBalance
     } = this.props;
 
     const renderTableRow = (token) => (
@@ -45,8 +44,6 @@ class Dashboard extends Component {
               <CardBody>
                 <h2 className="mb-2">{ethBalance}</h2>
                 <h5 className="mb-2">ETH wallet</h5>
-                <p>{ethAddress}</p>
-                <button className="btn btn-secondary text-white" disabled><i className="icon-wallet"></i>&nbsp;&nbsp;Copy address</button>
               </CardBody>
             </Card>
 
@@ -54,8 +51,6 @@ class Dashboard extends Component {
               <CardBody>
                 <h2 className="mb-2">{lbrsBalance}</h2>
                 <h5 className="mb-2">LBRS wallet</h5>
-                <p>{ethAddress}</p>
-                <button className="btn btn-secondary text-white" disabled><i className="icon-wallet"></i>&nbsp;&nbsp;Copy address</button>
               </CardBody>
             </Card>
 
