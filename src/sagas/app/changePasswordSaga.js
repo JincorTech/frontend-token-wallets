@@ -11,7 +11,15 @@ function* initChangePasswordIterator({ payload }) {
     yield put(initChangePassword.success(data));
     yield put(changeStep('verifyChangePassword'));
   } catch (e) {
-    yield put(initChangePassword.failure(new SubmissionError({ _error: e.message })));
+    if (e.error.isJoi) {
+      yield put(initChangePassword.failure(new SubmissionError({
+        _error: e.error.details[0].message
+      })));
+    } else {
+      yield put(initChangePassword.failure(new SubmissionError({
+        _error: e.message
+      })));
+    }
   }
 }
 
@@ -29,7 +37,15 @@ function* verifyChangePasswordIterator({ payload }) {
     yield put(verifyChangePassword.success());
     yield put(resetStore());
   } catch (e) {
-    yield put(verifyChangePassword.failure(new SubmissionError({ _error: e.message })));
+    if (e.error.isJoi) {
+      yield put(verifyChangePassword.failure(new SubmissionError({
+        _error: e.error.details[0].message
+      })));
+    } else {
+      yield put(verifyChangePassword.failure(new SubmissionError({
+        _error: e.message
+      })));
+    }
   }
 }
 

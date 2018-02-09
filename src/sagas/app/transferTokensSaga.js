@@ -32,7 +32,15 @@ function* initTransferTokensIterator({ payload }) {
     yield put(initTransferTokens.success(data));
     yield put(changeStep('verifyTransferTokens'));
   } catch (e) {
-    yield put(initTransferTokens.failure(new SubmissionError({ _error: e.message })));
+    if (e.error.isJoi) {
+      yield put(initTransferTokens.failure(new SubmissionError({
+        _error: e.error.details[0].message
+      })));
+    } else {
+      yield put(initTransferTokens.failure(new SubmissionError({
+        _error: e.message
+      })));
+    }
   }
 }
 
@@ -50,7 +58,15 @@ function* verifyTransferTokensIterator({ payload }) {
     yield put(verifyTransferTokens.success());
     yield put(resetStore());
   } catch (e) {
-    yield put(verifyTransferTokens.failure(new SubmissionError({ _error: e.message })));
+    if (e.error.isJoi) {
+      yield put(verifyTransferTokens.failure(new SubmissionError({
+        _error: e.error.details[0].message
+      })));
+    } else {
+      yield put(verifyTransferTokens.failure(new SubmissionError({
+        _error: e.message
+      })));
+    }
   }
 }
 

@@ -20,7 +20,15 @@ function* recoveryPasswordIterator({ payload }) {
     yield put(recoveryPassword.success(body));
     yield put(changeStep('verifyRecoveryPassword'));
   } catch (e) {
-    yield put(recoveryPassword.failure(new SubmissionError({ _error: e.message })));
+    if (e.error.isJoi) {
+      yield put(recoveryPassword.failure(new SubmissionError({
+        _error: e.error.details[0].message
+      })));
+    } else {
+      yield put(recoveryPassword.failure(new SubmissionError({
+        _error: e.message
+      })));
+    }
   }
 }
 
@@ -38,7 +46,15 @@ function* verifyRecoveryPasswordIterator({ payload }) {
     yield put(verifyRecoveryPassword.success(resetId));
     yield put(changeStep('setNewPassword'));
   } catch (e) {
-    yield put(verifyRecoveryPassword.failure(new SubmissionError({ _error: e.message })));
+    if (e.error.isJoi) {
+      yield put(verifyRecoveryPassword.failure(new SubmissionError({
+        _error: e.error.details[0].message
+      })));
+    } else {
+      yield put(verifyRecoveryPassword.failure(new SubmissionError({
+        _error: e.message
+      })));
+    }
   }
 }
 
@@ -57,7 +73,15 @@ function* setNewPasswordIterator({ payload }) {
     yield put(resetStore());
     yield put(push(namedRoutes.signIn));
   } catch (e) {
-    yield put(setNewPassword.failure(new SubmissionError({ _error: e.message })));
+    if (e.error.isJoi) {
+      yield put(setNewPassword.failure(new SubmissionError({
+        _error: e.error.details[0].message
+      })));
+    } else {
+      yield put(setNewPassword.failure(new SubmissionError({
+        _error: e.message
+      })));
+    }
   }
 }
 
