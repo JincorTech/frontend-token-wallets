@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Alert } from 'reactstrap';
 
 import { openTxPopup, closeTxPopup, toggleTxPopup } from '../../../redux/modules/app/txPopup';
 import { fetchTxs } from '../../../redux/modules/app/transactions';
@@ -32,10 +32,16 @@ class Transactions extends Component {
     } = this.props;
 
     const renderTxs = () => {
-      const sorted = Array.from(txs);
-      return sorted
-        .sort((a, b) => b.timestamp - a.timestamp)
-        .map((tx) => <Tx key={tx.id} tx={tx} openTxPopup={openTxPopup}/>);
+      if (txs.length > 0) {
+        const sorted = Array.from(txs);
+        return sorted
+          .sort((a, b) => b.timestamp - a.timestamp)
+          .map((tx) => <Tx key={tx.id} tx={tx} openTxPopup={openTxPopup}/>);
+      }
+
+      return (
+        <Alert color="info">There is no transactions yet</Alert>
+      );
     };
 
     return (
