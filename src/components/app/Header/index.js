@@ -38,7 +38,8 @@ class Header extends Component {
     const {
       logout,
       ethAddress,
-      name
+      name,
+      openQrAddressPopup
     } = this.props;
 
     const {
@@ -63,6 +64,9 @@ class Header extends Component {
               onCopy={() => this.setState({ addressCopied: true })}>
               <NavLink href="#"><i className="fa fa-fw fa-clipboard"/> {addressCopied ? 'Copied!' : 'Copy address'}</NavLink>
             </CopyToClipboard>
+          </NavItem>
+          <NavItem className="px-3">
+            <NavLink href="#" onClick={() => openQrAddressPopup(ethAddress)}><i className="fa fa-fw fa-qrcode"/></NavLink>
           </NavItem>
         </Nav>
         <Nav className="d-md-down-none ml-auto pr-4" navbar>

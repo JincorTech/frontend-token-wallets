@@ -144,6 +144,12 @@ class Sidebar extends Component {
                 <i className="fa fa-fw fa-clipboard"/> {this.state.addressCopied ? 'Copied!' : 'Copy address'}
               </Button>
             </CopyToClipboard>
+            <Button
+              onClick={() => this.props.openQrAddressPopup(this.props.ethAddress)}
+              color="link"
+              size="sm">
+              <i className="fa fa-fw fa-qrcode"/> Show as QR code
+            </Button>
           </div>
         </div>
         <nav className="sidebar-nav">
