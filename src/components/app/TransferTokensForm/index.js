@@ -31,7 +31,9 @@ const TransferTokensForm = (props) => {
       : (<Button color="primary" className="px-4" disabled={invalid}>Initiate transaction</Button>));
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form
+      autoComplete="false"
+      onSubmit={handleSubmit}>
       <Row>
         <Col xs={12}>
           <FormGroup>
@@ -43,7 +45,7 @@ const TransferTokensForm = (props) => {
               name="to"
               type="text"
               placeholder="Recipient address"
-              autoComplete="off"
+              autoComplete="false"
               validate={required}/>
           </FormGroup>
         </Col>
@@ -60,7 +62,7 @@ const TransferTokensForm = (props) => {
               name="amount"
               type="text"
               placeholder="Amount"
-              autoComplete="off"
+              autoComplete="false"
               validate={number}/>
           </FormGroup>
         </Col>
@@ -90,7 +92,7 @@ const TransferTokensForm = (props) => {
               name="paymentPassword"
               type="password"
               placeholder="Payment password"
-              autoComplete="off"
+              autoComplete="false"
               validate={passwordValidate}/>
           </FormGroup>
         </Col>
