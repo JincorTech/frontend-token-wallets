@@ -32,7 +32,7 @@ const TransferTokensForm = (props) => {
 
   return (
     <Form
-      autoComplete="false"
+      autoComplete="transferTokensForm"
       onSubmit={handleSubmit}>
       <Row>
         <Col xs={12}>
@@ -45,7 +45,7 @@ const TransferTokensForm = (props) => {
               name="to"
               type="text"
               placeholder="Recipient address"
-              autoComplete="false"
+              autoComplete="to"
               validate={required}/>
           </FormGroup>
         </Col>
@@ -62,7 +62,7 @@ const TransferTokensForm = (props) => {
               name="amount"
               type="text"
               placeholder="Amount"
-              autoComplete="false"
+              autoComplete="amount"
               validate={number}/>
           </FormGroup>
         </Col>
@@ -92,7 +92,7 @@ const TransferTokensForm = (props) => {
               name="paymentPassword"
               type="password"
               placeholder="Payment password"
-              autoComplete="false"
+              autoComplete="paymentPassword"
               validate={passwordValidate}/>
           </FormGroup>
         </Col>
