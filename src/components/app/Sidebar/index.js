@@ -130,8 +130,8 @@ class Sidebar extends Component {
 
     // sidebar-nav root
     return (
-      <div className="sidebar d-lg-none d-xl-none">
-        <div className="sidebar-header">
+      <div className="sidebar">
+        <div className="sidebar-header" style={{ maxWidth: '200px' }}>
           <h5>{this.props.name}</h5>
           <small>{this.props.email}</small>
           <div className="mt-4">
@@ -155,9 +155,11 @@ class Sidebar extends Component {
         <nav className="sidebar-nav">
           <Nav>
             {navList(nav.items)}
-            <a className="nav-link" onClick={() => this.props.logout()}>
-              <i className="fa fa-fw fa-sign-out"></i> Logout
-            </a>
+            <NavItem>
+              <a className="nav-link" onClick={() => this.props.logout()}>
+                <i className="fa fa-fw fa-sign-out"></i> Logout
+              </a>
+            </NavItem>
           </Nav>
         </nav>
         <SidebarMinimizer/>

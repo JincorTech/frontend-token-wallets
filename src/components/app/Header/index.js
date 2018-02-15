@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, NavLink, NavbarBrand, NavbarToggler, NavItem } from 'reactstrap';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Nav, NavbarBrand, NavbarToggler, NavItem } from 'reactstrap';
 
 import { namedRoutes } from '../../../routes';
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      addressCopied: false
-    };
-  }
-
   sidebarToggle(e) {
     e.preventDefault();
     document.body.classList.toggle('sidebar-hidden');
@@ -36,15 +27,8 @@ class Header extends Component {
 
   render() {
     const {
-      logout,
-      ethAddress,
-      name,
-      openQrAddressPopup
+      ethAddress
     } = this.props;
-
-    const {
-      addressCopied
-    } = this.state;
 
     return (
       <header className="app-header navbar">
@@ -52,32 +36,26 @@ class Header extends Component {
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
         <NavbarBrand tag={Link} to={namedRoutes.dashboard}/>
-        <Nav className="d-md-down-none" navbar>
-          <NavItem className="px-3">
-            <i className="fa fa-fw fa-user-o"/> {name}
-          </NavItem>
-          <NavItem className="px-3">
-            <i className="fa fa-fw fa-credit-card"/> {ethAddress}
-          </NavItem>
-          <NavItem className="px-3">
-            <CopyToClipboard text={ethAddress}
-              onCopy={() => this.setState({ addressCopied: true })}>
-              <NavLink href="#"><i className="fa fa-fw fa-clipboard"/> {addressCopied ? 'Copied!' : 'Copy address'}</NavLink>
-            </CopyToClipboard>
-          </NavItem>
-          <NavItem className="px-3">
-            <NavLink href="#" onClick={() => openQrAddressPopup(ethAddress)}><i className="fa fa-fw fa-qrcode"/></NavLink>
-          </NavItem>
-        </Nav>
+        <NavbarToggler className="d-md-down-none" onClick={this.sidebarToggle}>
+          <span className="navbar-toggler-icon"></span>
+        </NavbarToggler>
         <Nav className="d-md-down-none ml-auto pr-4" navbar>
-          <NavItem className="px-3">
-            <NavLink tag={Link} to={namedRoutes.dashboard}><i className="fa fa-fw fa-tachometer"/> Dashboard</NavLink>
-          </NavItem>
+          {/*
+            <NavItem className="px-3">
+              <NavLink tag={Link}
+              to={namedRoutes.dashboard}><i className="fa fa-fw fa-tachometer"/> Dashboard</NavLink>
+            </NavItem>
+            <NavItem className="d-md-down-none px-3">
+              <NavLink tag={Link}
+              to={namedRoutes.settings}><i className="fa fa-fw fa-cog"/> Settings</NavLink>
+            </NavItem>
+            <NavItem className="d-md-down-none px-3">
+              <NavLink href="#"
+              onClick={() => logout()}><i className="fa fa-fw fa-sign-out"/> Logout</NavLink>
+            </NavItem>
+            */}
           <NavItem className="d-md-down-none px-3">
-            <NavLink tag={Link} to={namedRoutes.settings}><i className="fa fa-fw fa-cog"/> Settings</NavLink>
-          </NavItem>
-          <NavItem className="d-md-down-none px-3">
-            <NavLink href="#" onClick={() => logout()}><i className="fa fa-fw fa-sign-out"/> Logout</NavLink>
+            {ethAddress} <i className="fa fa-fw fa-angle-down"/>
           </NavItem>
         </Nav>
       </header>
