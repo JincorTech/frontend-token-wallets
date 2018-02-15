@@ -39,22 +39,9 @@ class Dashboard extends Component {
     return (
       <div className="animated fadeIn mt-4">
         <Row>
-          <Col xs="12" lg="4">
-            <Card className="text-white bg-info">
-              <CardBody>
-                <h2 className="mb-2">{ethBalance}</h2>
-                <h5 className="mb-2">ETH wallet</h5>
-              </CardBody>
-            </Card>
-
-            <Card className="text-white bg-success">
-              <CardBody>
-                <h2 className="mb-2">{lbrsBalance}</h2>
-                <h5 className="mb-2">LBRS wallet</h5>
-              </CardBody>
-            </Card>
-
+          <Col xs="12" lg="8">
             <TokenTransfer/>
+            <Transactions/>
           </Col>
 
           <Col xs="12" lg="4">
@@ -65,6 +52,8 @@ class Dashboard extends Component {
               <CardBody>
                 <Table responsive>
                   <tbody>
+                  {renderTableRow({ symbol: 'ETH', balance: ethBalance, contractAddress: 'eth' })}
+                  {renderTableRow({ symbol: 'LBRS', balance: lbrsBalance, contractAddress: 'lbrs' })}
                   {erc20TokensBalance.map((token) => renderTableRow(token))}
                   </tbody>
                 </Table>
@@ -74,9 +63,6 @@ class Dashboard extends Component {
             <RegisterToken/>
           </Col>
 
-          <Col xs="12" lg="4">
-            <Transactions/>
-          </Col>
         </Row>
       </div>
     );

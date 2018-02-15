@@ -6,24 +6,33 @@ import { initTransferTokens, verifyTransferTokens, changeStep, resetStore } from
 
 
 const transformTransferTokensData = (req) => {
-  if (req.currency === 'eth_transfer') {
-    return {
-      type: 'eth_transfer',
-      amount: req.amount,
-      mnemonic: req.mnemonic,
-      to: req.to,
-      paymentPassword: req.paymentPassword
-    };
-  }
-
-  return {
-    type: 'erc20_transfer',
-    contractAddress: req.currency,
-    amount: req.amount,
+  const res = {
+    type: 'eth_transfer',
+    amount: Number(req.amount),
     mnemonic: req.mnemonic,
     to: req.to,
-    paymentPassword: req.paymentPassword
+    paymentPassword: req.paymentPassword,
+    gas: req.gas,
+    gasPrice: req.gasPrice
   };
+
+  if (req.currency === 'eth_transfer') {
+    res.type = req.currency;
+
+    if (req.gas) {
+      res.gas = req.gas;
+    }
+
+    if (req.gasPrice) {
+      res.gasPrice = req.gasPrice;
+    }
+
+    return res;
+  }
+
+  res.type = res.currency;
+  res.contractAddress = req.contractAddress;
+  return res;
 };
 
 function* initTransferTokensIterator({ payload }) {

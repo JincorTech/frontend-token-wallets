@@ -17,7 +17,17 @@ export const namedRoutes = {
   dashboard: '/app/dashboard',
   tokenTransfer: '/app/transfer',
   transactions: '/app/transactions',
-  settings: '/app/settings'
+  settings: '/app/settings',
+
+  // empty mock-containers
+  analytics: '/app/analytics',
+  blog: '/app/blog',
+  help: '/app/help',
+  invoices: '/app/invoices',
+  marketplace: '/app/marketplace',
+  projects: '/app/projects',
+  ratings: '/app/ratings',
+  support: '/app/support'
 };
 
 const AuthWrapped = isNotAuth(AuthWrapper);

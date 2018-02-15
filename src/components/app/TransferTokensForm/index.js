@@ -82,6 +82,34 @@ const TransferTokensForm = (props) => {
       </Row>
 
       <Row>
+        <Col xs={6}>
+          <FormGroup>
+            <Label>Gas limit</Label>
+
+            <Field
+              component={RenderInput}
+              icon={<i className="fa fa-server fa-fw"/>}
+              name="gas"
+              type="text"
+              placeholder="Gas limit"/>
+          </FormGroup>
+        </Col>
+
+        <Col xs={6}>
+          <FormGroup>
+            <Label>Gas price</Label>
+
+            <Field
+              component={RenderInput}
+              icon={<i className="fa fa-server fa-fw"/>}
+              name="gasPrice"
+              type="text"
+              placeholder="Gas price"/>
+          </FormGroup>
+        </Col>
+      </Row>
+
+      <Row>
         <Col xs={12}>
           <FormGroup>
             <Label>Payment password</Label>
@@ -124,7 +152,9 @@ const FormComponent = reduxForm({
     to: '',
     amount: '',
     currency: '',
-    paymentPassword: ''
+    paymentPassword: '',
+    gas: '',
+    gasPrice: ''
   }
 })(TransferTokensForm);
 
