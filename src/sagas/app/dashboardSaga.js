@@ -2,6 +2,7 @@ import { all, takeLatest, call, fork, put } from 'redux-saga/effects';
 import { get } from '../../utils/fetch';
 
 import { fetchBalances } from '../../redux/modules/app/dashboard';
+import { logout } from '../../redux/modules/app/app';
 
 
 function* fetchBalancesIterator() {
@@ -17,7 +18,11 @@ function* fetchBalancesIterator() {
     };
     yield put(fetchBalances.success(body));
   } catch (e) {
-    yield call(console.log, e);
+    if (e.status === 401) {
+      yield put(logout());
+    } else {
+      yield call(console.log, e);
+    }
   }
 }
 
