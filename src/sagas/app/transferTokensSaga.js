@@ -11,27 +11,26 @@ const transformTransferTokensData = (req) => {
     amount: Number(req.amount),
     mnemonic: req.mnemonic,
     to: req.to,
-    paymentPassword: req.paymentPassword,
-    gas: req.gas,
-    gasPrice: req.gasPrice
+    paymentPassword: req.paymentPassword
   };
 
   if (req.currency === 'eth_transfer') {
     res.type = req.currency;
-
-    if (req.gas) {
-      res.gas = req.gas;
-    }
-
-    if (req.gasPrice) {
-      res.gasPrice = req.gasPrice;
-    }
-
-    return res;
   }
 
-  res.type = res.currency;
-  res.contractAddress = req.contractAddress;
+  if (req.currency === 'erc20_transfer') {
+    res.type = res.currency;
+    res.contractAddress = req.contractAddress;
+  }
+
+  if (req.gas) {
+    res.gas = req.gas;
+  }
+
+  if (req.gasPrice) {
+    res.gasPrice = req.gasPrice;
+  }
+
   return res;
 };
 
