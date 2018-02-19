@@ -153,8 +153,8 @@ const FormComponent = reduxForm({
     amount: '',
     currency: '',
     paymentPassword: '',
-    gas: '',
-    gasPrice: ''
+    gas: '250000',
+    gasPrice: '5'
   }
 })(TransferTokensForm);
 
