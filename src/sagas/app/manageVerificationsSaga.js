@@ -3,6 +3,7 @@ import { SubmissionError } from 'redux-form';
 import { post } from '../../utils/fetch';
 
 import { setVerifications, verifySetVerifications, changeStep, resetStore } from '../../redux/modules/app/manageVerifications';
+import { fetchUser } from '../../redux/modules/app/app';
 
 
 function* setVerificationsIterator({ payload }) {
@@ -36,6 +37,7 @@ function* verifySetVerificationsIterator({ payload }) {
     yield call(post, '/user/preferences/verifications/verify', payload);
     yield put(verifySetVerifications.success());
     yield put(resetStore());
+    yield put(fetchUser());
   } catch (e) {
     if (e.error.isJoi) {
       yield put(verifySetVerifications.failure(new SubmissionError({

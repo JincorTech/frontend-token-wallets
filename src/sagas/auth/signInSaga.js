@@ -11,8 +11,19 @@ import { login } from '../../redux/modules/app/app';
 function* signInIterator({ payload }) {
   try {
     const data = yield call(post, '/user/login/initiate', payload);
-    yield put(signIn.success(data));
-    yield put(changeStep('verifySignIn'));
+
+    if (data.verification.method === 'inline') {
+      const verifyData = yield call(post, '/user/login/verify', {
+        verification: { verificationId: data.verification.verificationId, code: '777777' }
+      });
+      yield put(signIn.success(verifyData));
+      yield put(login(verifyData.accessToken));
+      yield put(resetStore());
+      yield put(push(namedRoutes.dashboard));
+    } else {
+      yield put(signIn.success(data));
+      yield put(changeStep('verifySignIn'));
+    }
   } catch (e) {
     if (e.error.isJoi) {
       yield put(signIn.failure(new SubmissionError({

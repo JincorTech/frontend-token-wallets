@@ -1,5 +1,5 @@
 import { all, takeLatest, call, fork, put } from 'redux-saga/effects';
-import { SubmissionError } from 'redux-form';
+import { SubmissionError, reset } from 'redux-form';
 import { post } from '../../utils/fetch';
 
 import { initTransferTokens, verifyTransferTokens, changeStep, resetStore } from '../../redux/modules/app/transferTokens';
@@ -37,8 +37,17 @@ const transformTransferTokensData = (req) => {
 function* initTransferTokensIterator({ payload }) {
   try {
     const data = yield call(post, '/dashboard/transaction/initiate', transformTransferTokensData(payload));
-    yield put(initTransferTokens.success(data));
-    yield put(changeStep('verifyTransferTokens'));
+
+    if (data.verification.method === 'inline') {
+      const verifyData = yield call(post, '/dashboard/transaction/verify', {
+        verification: { verificationId: data.verification.verificationId, code: '777777' }
+      });
+      yield put(initTransferTokens.success(verifyData));
+      yield put(reset('transferTokens'));
+    } else {
+      yield put(initTransferTokens.success(data));
+      yield put(changeStep('verifyTransferTokens'));
+    }
   } catch (e) {
     if (e.error.isJoi) {
       yield put(initTransferTokens.failure(new SubmissionError({
