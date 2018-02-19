@@ -43,7 +43,7 @@ const TransferTokensForm = (props) => {
               component={RenderInput}
               icon={<i className="fa fa-user fa-fw"/>}
               name="to"
-              type="text"
+              type="search"
               placeholder="Recipient address"
               autoComplete="to"
               validate={required}/>
@@ -60,7 +60,7 @@ const TransferTokensForm = (props) => {
               component={RenderInput}
               icon={<i className="fa fa-money fa-fw"/>}
               name="amount"
-              type="text"
+              type="number"
               placeholder="Amount"
               autoComplete="amount"
               validate={number}/>
@@ -90,7 +90,7 @@ const TransferTokensForm = (props) => {
               component={RenderInput}
               icon={<i className="fa fa-server fa-fw"/>}
               name="gas"
-              type="text"
+              type="number"
               placeholder="Gas limit"/>
           </FormGroup>
         </Col>
@@ -103,7 +103,7 @@ const TransferTokensForm = (props) => {
               component={RenderInput}
               icon={<i className="fa fa-server fa-fw"/>}
               name="gasPrice"
-              type="text"
+              type="number"
               placeholder="Gas price"/>
           </FormGroup>
         </Col>
@@ -153,8 +153,8 @@ const FormComponent = reduxForm({
     amount: '',
     currency: '',
     paymentPassword: '',
-    gas: '',
-    gasPrice: ''
+    gas: '250000',
+    gasPrice: '5'
   }
 })(TransferTokensForm);
 

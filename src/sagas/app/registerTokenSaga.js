@@ -12,12 +12,20 @@ function* fetchTokenInfoIterator({ payload }) {
     yield put(fetchTokenInfo.success(data));
     yield put(changeStep('registerToken'));
   } catch (e) {
-    yield call(console.log, e.status);
     if (e.status === 404) {
       yield put(fetchTokenInfo.success(payload));
       yield put(changeStep('registerToken'));
     } else {
-      yield put(fetchTokenInfo.failure(new SubmissionError({ _error: e.message })));
+      // eslint-disable-next-line
+      if (e.error.isJoi) {
+        yield put(fetchTokenInfo.failure(new SubmissionError({
+          _error: e.error.details[0].message
+        })));
+      } else {
+        yield put(fetchTokenInfo.failure(new SubmissionError({
+          _error: e.message
+        })));
+      }
     }
   }
 }

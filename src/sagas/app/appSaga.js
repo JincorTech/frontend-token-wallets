@@ -9,7 +9,8 @@ import {
   LOGIN,
   CHECK_AUTH,
   LOGOUT,
-  fetchUser
+  fetchUser,
+  logout
 } from '../../redux/modules/app/app';
 
 
@@ -64,7 +65,11 @@ function* fetchUserIterator() {
     const data = yield call(get, '/user/me');
     yield put(fetchUser.success(data));
   } catch (e) {
-    yield call(console.error, e);
+    if (e.status === 401) {
+      yield put(logout());
+    } else {
+      yield call(console.log, e);
+    }
   }
 }
 

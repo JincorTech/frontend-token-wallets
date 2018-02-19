@@ -1,5 +1,5 @@
 import { all, takeLatest, call, fork, put } from 'redux-saga/effects';
-import { SubmissionError } from 'redux-form';
+import { SubmissionError, reset } from 'redux-form';
 import { post } from '../../utils/fetch';
 
 import { initChangePassword, verifyChangePassword, changeStep, resetStore } from '../../redux/modules/app/changePassword';
@@ -8,8 +8,17 @@ import { initChangePassword, verifyChangePassword, changeStep, resetStore } from
 function* initChangePasswordIterator({ payload }) {
   try {
     const data = yield call(post, '/user/me/changePassword/initiate', payload);
-    yield put(initChangePassword.success(data));
-    yield put(changeStep('verifyChangePassword'));
+
+    if (data.verification.method === 'inline') {
+      const verifyData = yield call(post, '/user/me/changePassword/verify', {
+        verification: { verificationId: data.verification.verificationId, code: '777777' }
+      });
+      yield put(initChangePassword.success(verifyData));
+      yield put(reset('changePassword'));
+    } else {
+      yield put(initChangePassword.success(data));
+      yield put(changeStep('verifyChangePassword'));
+    }
   } catch (e) {
     if (e.error.isJoi) {
       yield put(initChangePassword.failure(new SubmissionError({

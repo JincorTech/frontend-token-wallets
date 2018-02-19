@@ -12,6 +12,7 @@ import signInReducer from './modules/auth/signIn';
 import signUpReducer from './modules/auth/signUp';
 import recoveryPasswordReducer from './modules/auth/recoveryPassword';
 import manageEmailNotifications from './modules/app/manageEmailNotifications';
+import manageVerifications from './modules/app/manageVerifications';
 import qrAddressPopup from './modules/app/qrAddressPopup';
 
 export default combineReducers({
@@ -27,6 +28,7 @@ export default combineReducers({
     transferTokens,
     changePassword,
     manageEmailNotifications,
+    manageVerifications,
     qrAddressPopup
   }),
 
