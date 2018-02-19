@@ -4,11 +4,14 @@ import { Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
 
 import { initChangePassword, verifyChangePassword } from '../../../redux/modules/app/changePassword';
 import { setNotifications } from '../../../redux/modules/app/manageEmailNotifications';
+import { setVerifications, verifySetVerifications } from '../../../redux/modules/app/manageVerifications';
 import { fetchUser } from '../../../redux/modules/app/app';
 
 import ChangePasswordForm from '../../../components/app/ChangePasswordForm';
 import VerifyChangePasswordForm from '../../../components/app/VerifyTransferTokensForm';
 import ManageEmailNotificationsForm from '../../../components/app/ManageEmailNotificationsForm';
+import ManageVerificationsForm from '../../../components/app/ManageVerificationsForm';
+import VerifySetVerificationsForm from '../../../components/app/VerifySetVerificationsForm';
 
 class Settings extends Component {
   componentDidMount() {
@@ -21,10 +24,14 @@ class Settings extends Component {
       changePasswordFetching,
       changePasswordVerification,
       manageEmailNotificationsFetching,
-      notifications
+      notifications,
+      setVerificationsStep,
+      manageVerificationsFetching,
+      verifications,
+      setVerificationsVerification
     } = this.props;
 
-    const renderStep = (currentStep) => {
+    const renderChangePassword = (currentStep) => {
       switch (currentStep) {
         case 'changePassword':
           return (
@@ -48,6 +55,31 @@ class Settings extends Component {
       }
     };
 
+    const renderSetVerifications = (currentStep) => {
+      switch (currentStep) {
+        case 'manageNotifications':
+          return (
+            <ManageVerificationsForm
+              onSubmit={setVerifications}
+              fetching={manageVerificationsFetching}
+              initialValues={{ ...verifications }}/>
+          );
+        case 'verifyManageNotifications':
+          return (
+            <VerifySetVerificationsForm
+              onSubmit={verifySetVerifications}
+              fetching={manageVerificationsFetching}
+              initialValues={{
+                verification: {
+                  verificationId: setVerificationsVerification.verificationId
+                }
+              }}/>
+          );
+        default:
+          return 'Something went wrong';
+      }
+    };
+
     return (
       <div className="animated fadeIn mt-4">
         <Row>
@@ -55,7 +87,7 @@ class Settings extends Component {
             <Card>
               <CardHeader>Change password</CardHeader>
               <CardBody>
-                {renderStep(changePasswordStep)}
+                {renderChangePassword(changePasswordStep)}
               </CardBody>
             </Card>
           </Col>
@@ -70,6 +102,14 @@ class Settings extends Component {
               </CardBody>
             </Card>
           </Col>
+          <Col xs="12" lg="4">
+            <Card>
+              <CardHeader>Manage e-mail verifications</CardHeader>
+              <CardBody>
+                {renderSetVerifications(setVerificationsStep)}
+              </CardBody>
+            </Card>
+          </Col>
         </Row>
       </div>
     );
@@ -81,8 +121,14 @@ export default connect(
     changePasswordFetching: state.app.changePassword.fetching,
     changePasswordStep: state.app.changePassword.step,
     changePasswordVerification: state.app.changePassword.verification,
+
+    notifications: state.app.app.user.preferences.notifications,
     manageEmailNotificationsFetching: state.app.manageEmailNotifications.fetching,
-    notifications: state.app.app.user.preferences.notifications
+
+    verifications: state.app.app.user.preferences.verifications,
+    manageVerificationsFetching: state.app.manageVerifications.fetching,
+    setVerificationsStep: state.app.manageVerifications.step,
+    setVerificationsVerification: state.app.manageVerifications.verification
   }),
   {
     fetchUser

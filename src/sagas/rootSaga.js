@@ -11,6 +11,7 @@ import signUpSaga from './auth/signUpSaga';
 import signInSaga from './auth/signInSaga';
 import recoveryPasswordSaga from './auth/recoveryPasswordSaga';
 import manageEmailNotificationsSaga from './app/manageEmailNotificationsSaga';
+import manageVerifications from './app/manageVerificationsSaga';
 
 export default function* () {
   yield all([
@@ -24,6 +25,7 @@ export default function* () {
     fork(signUpSaga),
     fork(signInSaga),
     fork(recoveryPasswordSaga),
-    fork(manageEmailNotificationsSaga)
+    fork(manageEmailNotificationsSaga),
+    fork(manageVerifications)
   ]);
 }
