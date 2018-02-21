@@ -135,8 +135,8 @@ class Sidebar extends Component {
           <h5>{this.props.name}</h5>
           <small>{this.props.email}</small>
           <div className="mt-4">
-            <h6 style={{ wordWrap: 'break-word' }}>{this.props.ethAddress}</h6>
-            <CopyToClipboard text={this.props.ethAddress}
+            <h6 style={{ wordWrap: 'break-word' }}>{this.props.wallets[0].address}</h6>
+            <CopyToClipboard text={this.props.wallets[0].address}
               onCopy={() => this.setState({ addressCopied: true })}>
               <Button
                 color="link"
@@ -145,7 +145,7 @@ class Sidebar extends Component {
               </Button>
             </CopyToClipboard>
             <Button
-              onClick={() => this.props.openQrAddressPopup(this.props.ethAddress)}
+              onClick={() => this.props.openQrAddressPopup(this.props.wallets[0].address)}
               color="link"
               size="sm">
               <i className="fa fa-fw fa-qrcode"/> Show as QR code
