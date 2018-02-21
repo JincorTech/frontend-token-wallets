@@ -65,7 +65,7 @@ class TokenTransfer extends Component {
 export default connect(
   (state) => ({
     erc20TokensBalance: state.app.dashboard.erc20TokensBalance,
-    selfAddress: state.app.app.user.ethAddress,
+    selfAddress: state.app.app.user.wallets[0].address,
     ...state.app.transferTokens
   }),
   {}

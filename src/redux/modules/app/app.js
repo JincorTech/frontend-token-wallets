@@ -21,11 +21,14 @@ const initialState = from({
   authorized: false,
   token: '',
   user: {
-    ethAddress: '',
     email: '',
     name: '',
     defaultVerificationMethod: 'email',
-    tokens: [],
+    wallets: [
+      {
+        address: ''
+      }
+    ],
     preferences: {
       notifications: {
         user_signin: false,

@@ -27,7 +27,7 @@ class Header extends Component {
 
   render() {
     const {
-      ethAddress
+      wallets
     } = this.props;
 
     return (
@@ -55,7 +55,7 @@ class Header extends Component {
             </NavItem>
             */}
           <NavItem className="d-md-down-none px-3">
-            {ethAddress} <i className="fa fa-fw fa-angle-down"/>
+            {wallets[0].address} <i className="fa fa-fw fa-angle-down"/>
           </NavItem>
         </Nav>
       </header>

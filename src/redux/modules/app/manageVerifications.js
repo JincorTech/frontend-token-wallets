@@ -30,7 +30,7 @@ export default createReducer({
   [setVerifications.SUCCESS]: (state, { payload }) => (
     state.merge({
       fetching: false,
-      verification: payload
+      verification: payload.verification
     })
   ),
 
