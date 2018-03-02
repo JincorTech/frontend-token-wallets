@@ -7,6 +7,7 @@ import transactionsSaga from './app/transactionsSaga';
 import registerTokenSaga from './app/registerTokenSaga';
 import transferTokensSaga from './app/transferTokensSaga';
 import changePassword from './app/changePasswordSaga';
+import changePaymentPassword from './app/changePaymentPasswordSaga';
 import signUpSaga from './auth/signUpSaga';
 import signInSaga from './auth/signInSaga';
 import recoveryPasswordSaga from './auth/recoveryPasswordSaga';
@@ -22,6 +23,7 @@ export default function* () {
     fork(registerTokenSaga),
     fork(transferTokensSaga),
     fork(changePassword),
+    fork(changePaymentPassword),
     fork(signUpSaga),
     fork(signInSaga),
     fork(recoveryPasswordSaga),
