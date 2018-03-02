@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import { Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
 
 import { initChangePassword, verifyChangePassword } from '../../../redux/modules/app/changePassword';
+import { initChangePaymentPassword, verifyChangePaymentPassword } from '../../../redux/modules/app/changePaymentPassword';
 import { setNotifications } from '../../../redux/modules/app/manageEmailNotifications';
 import { setVerifications, verifySetVerifications } from '../../../redux/modules/app/manageVerifications';
 import { fetchUser } from '../../../redux/modules/app/app';
 
 import ChangePasswordForm from '../../../components/app/ChangePasswordForm';
 import VerifyChangePasswordForm from '../../../components/app/VerifyTransferTokensForm';
+import ChangePaymentPasswordForm from '../../../components/app/ChangePaymentPasswordForm';
+import VerifyChangePaymentPasswordForm from '../../../components/app/VerifyChangePaymentPasswordForm';
 import ManageEmailNotificationsForm from '../../../components/app/ManageEmailNotificationsForm';
 import ManageVerificationsForm from '../../../components/app/ManageVerificationsForm';
 import VerifySetVerificationsForm from '../../../components/app/VerifySetVerificationsForm';
@@ -23,6 +26,9 @@ class Settings extends Component {
       changePasswordStep,
       changePasswordFetching,
       changePasswordVerification,
+      changePaymentPasswordStep,
+      changePaymentPasswordFetching,
+      changePaymentPasswordVerification,
       manageEmailNotificationsFetching,
       notifications,
       setVerificationsStep,
@@ -47,6 +53,30 @@ class Settings extends Component {
               initialValues={{
                 verification: {
                   verificationId: changePasswordVerification.verificationId
+                }
+              }}/>
+          );
+        default:
+          return 'Something went wrong';
+      }
+    };
+
+    const renderChangePaymentPassword = (currentStep) => {
+      switch (currentStep) {
+        case 'changePaymentPassword':
+          return (
+            <ChangePaymentPasswordForm
+              onSubmit={initChangePaymentPassword}
+              fetching={changePaymentPasswordFetching}/>
+          );
+        case 'verifyChangePaymentPassword':
+          return (
+            <VerifyChangePaymentPasswordForm
+              onSubmit={verifyChangePaymentPassword}
+              fetching={changePaymentPasswordFetching}
+              initialValues={{
+                verification: {
+                  verificationId: changePaymentPasswordVerification.verificationId
                 }
               }}/>
           );
@@ -111,6 +141,16 @@ class Settings extends Component {
             </Card>
           </Col>
         </Row>
+        <Row>
+          <Col xs="12" lg="4">
+            <Card>
+              <CardHeader>Change payment password</CardHeader>
+              <CardBody>
+                {renderChangePaymentPassword(changePaymentPasswordStep)}
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
       </div>
     );
   }
@@ -121,6 +161,10 @@ export default connect(
     changePasswordFetching: state.app.changePassword.fetching,
     changePasswordStep: state.app.changePassword.step,
     changePasswordVerification: state.app.changePassword.verification,
+
+    changePaymentPasswordFetching: state.app.changePaymentPassword.fetching,
+    changePaymentPasswordStep: state.app.changePaymentPassword.step,
+    changePaymentPasswordVerification: state.app.changePaymentPassword.verification,
 
     notifications: state.app.app.user.preferences.notifications,
     manageEmailNotificationsFetching: state.app.manageEmailNotifications.fetching,
