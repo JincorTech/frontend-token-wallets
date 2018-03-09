@@ -104,7 +104,8 @@ const TransferTokensForm = (props) => {
               icon={<i className="fa fa-server fa-fw"/>}
               name="gasPrice"
               type="number"
-              placeholder="Gas price"/>
+              placeholder="Gas price"
+              append="Gwei"/>
           </FormGroup>
         </Col>
       </Row>

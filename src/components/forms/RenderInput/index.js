@@ -1,11 +1,12 @@
 import React from 'react';
-import { Input, InputGroup, FormFeedback } from 'reactstrap';
+import { Input, InputGroup, InputGroupAddon, FormFeedback } from 'reactstrap';
 
 const RenderInput = (props) => {
   const {
     input,
     meta,
     icon,
+    append,
     ...restProps
   } = props;
 
@@ -31,6 +32,7 @@ const RenderInput = (props) => {
         </span>
       </div>
       <Input valid={isValid()} meta={meta} {...input} {...restProps}/>
+      {append ? <InputGroupAddon addonType="append">{append}</InputGroupAddon> : null}
       <FormFeedback>{error}</FormFeedback>
     </InputGroup>
   );
