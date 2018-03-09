@@ -25,7 +25,6 @@ class Dashboard extends Component {
   render() {
     const {
       ethBalance,
-      lbrsBalance,
       erc20TokensBalance
     } = this.props;
 
@@ -53,8 +52,9 @@ class Dashboard extends Component {
                 <Table responsive>
                   <tbody>
                   {renderTableRow({ symbol: 'ETH', balance: ethBalance, contractAddress: 'eth' })}
-                  {renderTableRow({ symbol: 'LBRS', balance: lbrsBalance, contractAddress: 'lbrs' })}
-                  {erc20TokensBalance.map((token) => renderTableRow(token))}
+                  {erc20TokensBalance
+                    .filter((token) => token > 0)
+                    .map((token) => renderTableRow(token))}
                   </tbody>
                 </Table>
               </CardBody>

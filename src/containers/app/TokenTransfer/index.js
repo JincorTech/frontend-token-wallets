@@ -17,11 +17,13 @@ class TokenTransfer extends Component {
       verification
     } = this.props;
 
-    const currencies = erc20TokensBalance.reduce(
-      (acc, token) =>
-        acc.concat({ value: token.contractAddress, label: token.symbol }),
-      [{ value: '', label: 'Select currency' }, { value: 'eth_transfer', label: 'ETH' }]
-    );
+    const currencies = erc20TokensBalance.reduce((acc, token) => {
+      if (Number(token.balance) > 0) {
+        return acc.concat({ value: token.contractAddress, label: token.symbol });
+      }
+
+      return acc;
+    }, [{ value: '', label: 'Select currency' }, { value: 'eth_transfer', label: 'ETH' }]);
 
     const renderStep = (currentStep) => {
       switch (currentStep) {

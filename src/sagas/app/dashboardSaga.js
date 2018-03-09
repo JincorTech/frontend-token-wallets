@@ -8,15 +8,7 @@ import { logout } from '../../redux/modules/app/app';
 function* fetchBalancesIterator() {
   try {
     const data = yield call(get, '/dashboard');
-    const lbrsBalance = data.erc20TokensBalance.reduce((acc, item) =>
-      (item.symbol === 'LBRS'
-        ? item.balance
-        : acc), '0');
-    const body = {
-      lbrsBalance,
-      ...data
-    };
-    yield put(fetchBalances.success(body));
+    yield put(fetchBalances.success(data));
   } catch (e) {
     if (e.status === 401) {
       yield put(logout());
