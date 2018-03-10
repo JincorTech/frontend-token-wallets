@@ -53,7 +53,7 @@ class Dashboard extends Component {
                   <tbody>
                   {renderTableRow({ symbol: 'ETH', balance: ethBalance, contractAddress: 'eth' })}
                   {erc20TokensBalance
-                    .filter((token) => token > 0)
+                    .filter((token) => token.balance > 0)
                     .map((token) => renderTableRow(token))}
                   </tbody>
                 </Table>
